@@ -1,23 +1,32 @@
-from django.contrib.auth.management.commands.createsuperuser import Command as BaseCommand
+"""
+users/management/commands/create_superadmin.py
+
+Creates the default super admin account if it doesn't exist.
+Run automatically during build via build.sh
+"""
+from django.core.management.base import BaseCommand
+from users.models import CustomUser
 
 
 class Command(BaseCommand):
-    """
-    Extends the built-in createsuperuser to also set role='super_admin'
-    so the Kennedia admin dashboard works correctly on first login.
-    """
+    help = 'Create default super admin account if it does not exist.'
+
     def handle(self, *args, **options):
-        super().handle(*args, **options)
-        # After the user is created, set the role
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-        email = options.get('email')
-        if email:
-            try:
-                user = User.objects.get(email=email)
-                if user.role != 'super_admin':
-                    user.role = 'super_admin'
-                    user.save(update_fields=['role'])
-                    self.stdout.write('Role set to super_admin.')
-            except User.DoesNotExist:
-                pass
+        email = 'justice.okafor@kennediaconsulting.net'
+        if CustomUser.objects.filter(email=email).exists():
+            self.stdout.write(f'Super admin already exists: {email}')
+            return
+
+        user = CustomUser(
+            username='justice_okafor',
+            email=email,
+            first_name='Justice',
+            last_name='Okafor',
+            role='super_admin',
+            is_staff=True,
+            is_superuser=True,
+            is_active=True,
+        )
+        user.set_password('Kennedia1234!')
+        user.save()
+        self.stdout.write(self.style.SUCCESS(f'Super admin created: {email}'))
