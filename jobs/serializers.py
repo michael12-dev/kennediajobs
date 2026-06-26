@@ -14,6 +14,7 @@ class JobListSerializer(serializers.ModelSerializer):
             'id', 'title', 'company', 'company_logo', 'industry', 'job_type',
             'location', 'salary', 'formatted_salary', 'salary_display',
             'description', 'status', 'deadline', 'requires_registration',
+            'experience_required', 'qualification_required',
             'application_count', 'views_count', 'created_at',
         ]
 
@@ -28,7 +29,8 @@ class JobDetailSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'title', 'company', 'company_logo', 'industry', 'job_type',
             'location', 'salary', 'formatted_salary', 'salary_display',
-            'description', 'requirements', 'benefits', 'experience_required',
+            'description', 'responsibilities', 'requirements', 'benefits',
+            'experience_required', 'qualification_required',
             'status', 'deadline', 'requires_registration',
             'application_count', 'views_count', 'created_at', 'updated_at',
         ]
@@ -41,8 +43,9 @@ class JobWriteSerializer(serializers.ModelSerializer):
         fields = [
             'title', 'company', 'company_logo', 'industry', 'job_type',
             'location', 'salary', 'salary_display',
-            'description', 'requirements', 'benefits',
-            'experience_required', 'status', 'deadline', 'employer_email',
+            'description', 'responsibilities', 'requirements', 'benefits',
+            'experience_required', 'qualification_required',
+            'status', 'deadline', 'employer_email',
         ]
 
 
