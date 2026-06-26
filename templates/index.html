@@ -1442,6 +1442,462 @@ input:focus, select:focus, textarea:focus {
   backdrop-filter: blur(8px);
 }
 
+/* ══════════════════════════════════════════════════
+   NEW HOME PAGE — FIGMA DESIGN
+══════════════════════════════════════════════════ */
+
+/* ── Announcement ticker bar ── */
+.announcement-bar {
+  background: #111d12;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  position: relative;
+  z-index: 10;
+}
+.announcement-track {
+  display: inline-flex;
+  gap: 60px;
+  animation: tickerScroll 30s linear infinite;
+}
+.announcement-track:hover { animation-play-state: paused; }
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ann-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+}
+.ann-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.ann-reg {
+  color: white;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+.ann-apply {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ── Hero search section ── */
+.home-hero-section {
+  background: #f9fafb;
+  padding: 40px 5% 32px;
+}
+.home-hero-inner { max-width: 1200px; margin: 0 auto; }
+.home-hero-tag {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.home-hero-title {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.view-all-link {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green);
+  cursor: pointer;
+  text-decoration: none;
+}
+.view-all-link:hover { text-decoration: underline; }
+
+/* ── Search bar ── */
+.home-search-bar {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  padding: 8px 8px 8px 20px;
+  gap: 0;
+  margin-bottom: 28px;
+}
+.home-search-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.home-search-field input,
+.home-search-field select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 15px;
+  color: #374151;
+  width: 100%;
+  font-family: inherit;
+  box-shadow: none !important;
+}
+.home-search-icon { font-size: 16px; flex-shrink: 0; color: #9ca3af; }
+.home-search-divider {
+  width: 1px;
+  height: 32px;
+  background: #e5e7eb;
+  margin: 0 16px;
+  flex-shrink: 0;
+}
+.home-search-btn {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.home-search-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+/* ── Industry tiles ── */
+.industry-tiles {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.industry-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.industry-tile:hover {
+  border-color: var(--green);
+  background: var(--green-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45,122,58,0.12);
+}
+.ind-tile-icon { font-size: 22px; }
+.ind-tile-label { font-size: 11px; font-weight: 700; color: #374151; }
+.ind-tile-count { font-size: 10px; color: var(--green); font-weight: 600; }
+
+/* ── Jobs section ── */
+.jobs-section-new { background: white; padding: 32px 5% 40px; }
+.jobs-section-inner { max-width: 1200px; margin: 0 auto; }
+.jobs-grid-new {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── New job card design ── */
+.job-card-new {
+  background: white;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 22px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+}
+.job-card-new:hover {
+  border-color: var(--green);
+  box-shadow: 0 8px 24px rgba(45,122,58,0.12);
+  transform: translateY(-3px);
+}
+.job-card-new-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.job-card-new-logo {
+  width: 48px;
+  height: 48px;
+  background: #f3f4f6;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.job-card-new-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+.job-type-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge-full { background: #d4edda; color: #155724; }
+.badge-part { background: #fff3cd; color: #856404; }
+.badge-contract { background: #d1ecf1; color: #0c5460; }
+.badge-remote { background: #e2d9f3; color: #6610f2; }
+.badge-hybrid { background: #fce8d8; color: #c25e00; }
+.badge-internship { background: #f8d7da; color: #721c24; }
+.job-card-new-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111d12;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+.job-card-new-company { font-size: 13px; color: #6b7280; margin-bottom: 10px; }
+.job-card-new-desc { font-size: 13px; color: #6b7280; line-height: 1.5; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.job-card-new-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+.job-card-new-meta span { display: flex; align-items: center; gap: 4px; }
+.job-card-new-apply {
+  width: 100%;
+  padding: 11px;
+  border: 2px solid var(--green);
+  background: transparent;
+  color: var(--green);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.job-card-new-apply:hover:not(:disabled) {
+  background: var(--green);
+  color: white;
+}
+.job-card-new-apply:disabled {
+  border-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ── Featured banner ── */
+.featured-banner-section { padding: 32px 5%; background: #f9fafb; }
+.featured-banner-slider {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  height: 380px;
+}
+.featured-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  display: flex;
+  align-items: center;
+}
+.featured-slide.active { opacity: 1; z-index: 1; }
+.featured-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+}
+.featured-slide-content {
+  position: relative;
+  z-index: 2;
+  padding: 48px;
+  max-width: 520px;
+  color: white;
+}
+.featured-slide-content h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.featured-slide-content p { font-size: 15px; opacity: 0.9; line-height: 1.6; }
+.feat-btn-primary {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.feat-btn-primary:hover { background: var(--green-dark); }
+.feat-btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.7);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.feat-btn-secondary:hover { background: rgba(255,255,255,0.15); }
+.featured-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+.feat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.feat-dot.active { background: white; width: 24px; border-radius: 4px; }
+
+/* ── Stats section ── */
+.stats-section { background: white; padding: 40px 5%; }
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+.stat-item { padding: 20px; }
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label { font-size: 14px; color: #6b7280; font-weight: 600; }
+
+/* ── How it works ── */
+.how-section { background: #f9fafb; padding: 56px 5%; }
+.how-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.how-title {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111d12;
+  line-height: 1.3;
+  margin: 8px 0 28px;
+}
+.how-steps { display: flex; flex-direction: column; gap: 24px; }
+.how-step-item { display: flex; gap: 16px; align-items: flex-start; }
+.how-step-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--green-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.how-step-title { font-weight: 800; color: #111d12; font-size: 15px; margin-bottom: 4px; }
+.how-step-desc { font-size: 13px; color: #6b7280; line-height: 1.6; }
+.how-image img { width: 100%; border-radius: 16px; }
+
+/* ── Partners ── */
+.partners-section { background: white; padding: 32px 5%; overflow: hidden; }
+.partners-track { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.partner-img { height: 48px; object-fit: contain; opacity: 0.7; filter: grayscale(0.3); transition: all 0.2s; }
+.partner-img:hover { opacity: 1; filter: none; }
+
+/* ── Pagination ── */
+.jobs-pagination { display: flex; justify-content: center; gap: 8px; margin-top: 32px; flex-wrap: wrap; }
+.jobs-pagination button {
+  padding: 8px 16px;
+  border: 1.5px solid #e5e7eb;
+  background: white;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.jobs-pagination button.active,
+.jobs-pagination button:hover {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 900px) {
+  .industry-tiles { grid-template-columns: repeat(4, 1fr); }
+  .jobs-grid-new { grid-template-columns: repeat(2, 1fr); }
+  .how-inner { grid-template-columns: 1fr; }
+  .how-image { display: none; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .industry-tiles { grid-template-columns: repeat(3, 1fr); }
+  .jobs-grid-new { grid-template-columns: 1fr; }
+  .home-search-bar { flex-direction: column; border-radius: 16px; padding: 16px; gap: 12px; }
+  .home-search-divider { display: none; }
+  .home-search-btn { width: 100%; padding: 14px; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .featured-banner-slider { height: 280px; }
+  .featured-slide-content { padding: 28px; }
+  .featured-slide-content h2 { font-size: 22px; }
+}
+
 </style>
 </head>
 <body>
@@ -1728,191 +2184,259 @@ input:focus, select:focus, textarea:focus {
 <!-- ══════════════ HOME PAGE ══════════════ -->
 <div class="page active" id="page-home">
 
-  <!-- HERO ADVERT SLIDER -->
-  <div class="hero-slider" id="heroSlider">
-    <div class="hero-slide active" style="background-image: url('/static/images/background_img1.jpg')"></div>
-    <div class="hero-slide" style="background-image: url('/static/images/background_img2.jpg')"></div>
-    <div class="hero-slide" style="background-image: url('/static/images/background_img3.jpg')"></div>
-    <div class="hero-slide" style="background-image: url('/static/images/background_img4.jpg')"></div>
-    
-
-    <div class="hero-slider-dots" id="heroSliderDots">
-      <span class="hero-dot active" onclick="goToSlide(0)"></span>
-      <span class="hero-dot" onclick="goToSlide(1)"></span>
-      <span class="hero-dot" onclick="goToSlide(2)"></span>
-      <span class="hero-dot" onclick="goToSlide(3)"></span>
+  <!-- ══ ANNOUNCEMENT TICKER ══ -->
+  <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-track" id="announcementTrack">
+      <span class="ann-item">
+        <img src="/static/images/logo.png" alt="K" class="ann-logo">
+        We're looking for talented professionals to join our growing team.
+        <a onclick="showPage('home')" class="ann-reg">REGISTER TO APPLY</a>
+        <button class="ann-apply" onclick="showPage('home')">Apply Now</button>
+      </span>
+      <span class="ann-item">
+        <img src="/static/images/logo.png" alt="K" class="ann-logo">
+        We're looking for talented professionals to join our growing team.
+        <a onclick="showPage('home')" class="ann-reg">REGISTER TO APPLY</a>
+        <button class="ann-apply" onclick="showPage('home')">Apply Now</button>
+      </span>
+      <span class="ann-item">
+        <img src="/static/images/logo.png" alt="K" class="ann-logo">
+        We're looking for talented professionals to join our growing team.
+        <a onclick="showPage('home')" class="ann-reg">REGISTER TO APPLY</a>
+        <button class="ann-apply" onclick="showPage('home')">Apply Now</button>
+      </span>
     </div>
-    <button class="hero-slider-arrow left" onclick="prevSlide()">&#8249;</button>
-    <button class="hero-slider-arrow right" onclick="nextSlide()">&#8250;</button>
-  </div><!-- end hero-slider -->
+  </div>
 
-  <section class="portal-info-section">
-  <div class="portal-container">
-    <div class="portal-inner-layout">
-      
-      <div class="portal-badge">
-        Kennedia Consulting Job Portal
+  <!-- ══ HERO SEARCH SECTION ══ -->
+  <section class="home-hero-section">
+    <div class="home-hero-inner">
+      <div class="home-hero-tag">OPPORTUNITIES</div>
+      <h1 class="home-hero-title">Our Latest Job Openings!</h1>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:18px;">
+        <a onclick="showPage('home')" class="view-all-link">View All Jobs →</a>
       </div>
-      
-      <h2>Connecting talented professionals with the best employers</h2>
-      
-      <p class="portal-lead-text">
-        Find your next career move in banking, finance, tech, FMCG, and more — all across Nigeria.
-      </p>
-      
-      <!-- Renamed fields to prevent breaking your original CSS selectors -->
-      <div class="portal-search-bar">
-        <div class="portal-search-field">
-          <label for="filterLoc">Location</label>
-          <select id="filterLoc">
-            <option value="">All States</option>
-            <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
-            <option>Ogun</option><option>Oyo</option><option>Kano</option>
-            <option>Delta</option><option>Enugu</option><option>Anambra</option>
-            <option>Edo</option><option>Imo</option><option>Akwa Ibom</option>
-            <option>Nationwide</option>
-          </select>
+      <!-- Search bar -->
+      <div class="home-search-bar">
+        <div class="home-search-field">
+          <span class="home-search-icon">🔍</span>
+          <input type="text" id="filterTitle" placeholder="Job Title or Keyword" oninput="filterJobs()">
         </div>
-        
-        <div class="portal-search-divider"></div>
-        
-        <div class="portal-search-field">
-          <label for="filterInd">Industry</label>
-          <select id="filterInd">
+        <div class="home-search-divider"></div>
+        <div class="home-search-field">
+          <span class="home-search-icon">📍</span>
+          <input type="text" id="filterLoc" placeholder="All Locations" oninput="filterJobs()">
+        </div>
+        <div class="home-search-divider"></div>
+        <div class="home-search-field">
+          <span class="home-search-icon">💼</span>
+          <select id="filterInd" onchange="filterJobs()" style="border:none;outline:none;background:transparent;font-size:15px;color:#374151;width:100%;cursor:pointer;">
             <option value="">All Industries</option>
-            <option>Banking &amp; Finance</option><option>Technology</option>
-            <option>FMCG</option><option>Oil and Gas</option>
-            <option>Human Resources / Consulting</option>
-            <option>Real Estate</option><option>Insurance</option>
-            <option>Telecommunications</option><option>Education</option>
+            <option value="accounting_finance_banking">Accounting, Finance & Banking</option>
+            <option value="agriculture_agribusiness">Agriculture & Agribusiness</option>
+            <option value="arts_entertainment_media">Arts, Entertainment & Media</option>
+            <option value="automotive_aviation_transport">Automotive, Aviation & Transportation</option>
+            <option value="construction_engineering_realestate">Construction, Engineering & Real Estate</option>
+            <option value="consumer_goods_retail_ecommerce">Consumer Goods, Retail & E-commerce</option>
+            <option value="consulting_professional_services">Consulting & Professional Services</option>
+            <option value="education_training">Education & Training</option>
+            <option value="energy_utilities_mining_oilgas">Energy, Utilities, Mining & Oil & Gas</option>
+            <option value="event_hospitality_tourism">Event Management, Hospitality & Tourism</option>
+            <option value="fashion_beauty_lifestyle">Fashion, Beauty & Lifestyle</option>
+            <option value="food_beverage">Food & Beverage</option>
+            <option value="government_public_admin">Government & Public Administration</option>
+            <option value="healthcare_medical_pharma">Healthcare, Medical & Pharmaceutical</option>
+            <option value="human_resources_recruitment">Human Resources & Recruitment</option>
+            <option value="information_technology_telecom">Information Technology & Telecommunications</option>
+            <option value="legal_services">Legal Services</option>
+            <option value="logistics_supply_chain">Logistics, Supply Chain & Warehousing</option>
+            <option value="manufacturing_production">Manufacturing & Production</option>
+            <option value="nonprofit_ngo_social">Nonprofit, NGO & Social Services</option>
+            <option value="research_science_lab">Research, Science & Laboratory Services</option>
+            <option value="sales_marketing_pr">Sales, Marketing & Public Relations</option>
+            <option value="security_defense">Security & Defense</option>
+            <option value="web_digital_creative">Web, Digital Media & Creative Services</option>
+            <option value="other">Other</option>
           </select>
         </div>
-        
-        <div class="portal-search-divider"></div>
-        
-        <div class="portal-search-field portal-title-expand">
-          <label for="filterTitle">Job Title</label>
-          <input type="text" id="filterTitle" placeholder="e.g. Sales Executive">
+        <button class="home-search-btn" onclick="filterJobs()">Search</button>
+      </div>
+
+      <!-- Industry Category Tiles -->
+      <div class="industry-tiles" id="industryTiles">
+        <div class="industry-tile" onclick="setIndustryFilter('information_technology_telecom')">
+          <span class="ind-tile-icon">🖥️</span>
+          <span class="ind-tile-label">Technology</span>
+          <span class="ind-tile-count" id="ind-count-it">0 jobs</span>
         </div>
-        
-        <button class="portal-search-submit" onclick="filterJobs()">
-          🔍 Search Jobs
-        </button>
-      </div>
-      
-      <!-- Cleaned up Stats Layout -->
-      <div class="portal-stats-row">
-        <div class="portal-stat-item"><strong>3,000+</strong><span>Candidates Placed</span></div>
-        <div class="portal-stat-item"><strong>500+</strong><span>Active Vacancies</span></div>
-        <div class="portal-stat-item"><strong>200+</strong><span>Partner Companies</span></div>
-        <div class="portal-stat-item"><strong>36</strong><span>States Covered</span></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-  <section>
-    <div class="section-head">
-      <div class="section-tag">Latest Openings</div>
-      <h2 class="section-title">Our Latest Job Openings!</h2>
-      <p class="section-sub">Hand-picked, verified opportunities from trusted employers across Nigeria.</p>
-    </div>
-    <div class="jobs-grid" id="jobsGrid"></div>
-    <div style="text-align:center;margin-top:8px;margin-bottom:4px;"><span id="jobs-count" style="font-size:13px;color:var(--muted);font-weight:500;"></span></div>
-    <div class="pagination" id="pagination"></div>
-  </section>
-
-  <section style="background:white; padding-top:56px; padding-bottom:56px;">
-    <div class="section-head" style="text-align:center; display:flex; flex-direction:column; align-items:center;">
-      <div class="section-tag">How It Works</div>
-      <h2 class="section-title">We Make the Job Search</h2>
-    </div>
-    <div class="how-section-inner" style="max-width:1060px; margin:0 auto; display:flex; align-items:center; gap:48px; flex-wrap:wrap;">
-      <!-- Left: image with highlight line -->
-      <div class="how-img-wrap" style="flex:1; min-width:260px; position:relative; display:flex; align-items:center; justify-content:center;">
-        <img src="/static/images/hl1.png" alt="" class="how-hl1" style="position:absolute; left:-18px; top:50%; transform:translateY(-50%); height:220px; width:auto; object-fit:contain; opacity:0.85; z-index:0;">
-        <img src="/static/images/how-img.png" alt="How Kennedia Works" class="how-main-img" style="width:100%; max-width:420px; border-radius:16px; box-shadow: 0 12px 40px rgba(30,82,40,0.18); position:relative; z-index:1; object-fit:cover;">
-      </div>
-      <!-- Right: cards -->
-      <div style="flex:1; min-width:260px;">
-        <div class="how-grid" style="grid-template-columns:1fr; gap:20px;">
-          <div class="how-card" style="text-align:left; display:flex; gap:16px; align-items:flex-start;">
-            <div class="how-icon" style="flex-shrink:0; margin:0;">🔍</div>
-            <div><h3>Simple</h3><p>We combine jobs from most sources on a single page — one search, all opportunities, zero hassle.</p></div>
-          </div>
-          <div class="how-card" style="text-align:left; display:flex; gap:16px; align-items:flex-start;">
-            <div class="how-icon" style="flex-shrink:0; margin:0;">🛡️</div>
-            <div><h3>Safe</h3><p>We validate every job post, blocking spam, phishing, and inappropriate publications before they reach you.</p></div>
-          </div>
-          <div class="how-card" style="text-align:left; display:flex; gap:16px; align-items:flex-start;">
-            <div class="how-icon" style="flex-shrink:0; margin:0;">⚡</div>
-            <div><h3>Fast</h3><p>We suggest the best matches and keep you updated with new opportunities as soon as they go live.</p></div>
-          </div>
+        <div class="industry-tile" onclick="setIndustryFilter('accounting_finance_banking')">
+          <span class="ind-tile-icon">🏦</span>
+          <span class="ind-tile-label">Finance</span>
+          <span class="ind-tile-count" id="ind-count-fin">0 jobs</span>
+        </div>
+        <div class="industry-tile" onclick="setIndustryFilter('healthcare_medical_pharma')">
+          <span class="ind-tile-icon">🏥</span>
+          <span class="ind-tile-label">Healthcare</span>
+          <span class="ind-tile-count" id="ind-count-health">0 jobs</span>
+        </div>
+        <div class="industry-tile" onclick="setIndustryFilter('sales_marketing_pr')">
+          <span class="ind-tile-icon">📈</span>
+          <span class="ind-tile-label">Marketing</span>
+          <span class="ind-tile-count" id="ind-count-mkt">0 jobs</span>
+        </div>
+        <div class="industry-tile" onclick="setIndustryFilter('energy_utilities_mining_oilgas')">
+          <span class="ind-tile-icon">⛽</span>
+          <span class="ind-tile-label">Oil & Gas</span>
+          <span class="ind-tile-count" id="ind-count-oil">0 jobs</span>
+        </div>
+        <div class="industry-tile" onclick="setIndustryFilter('human_resources_recruitment')">
+          <span class="ind-tile-icon">👥</span>
+          <span class="ind-tile-label">HR</span>
+          <span class="ind-tile-count" id="ind-count-hr">0 jobs</span>
+        </div>
+        <div class="industry-tile" onclick="setIndustryFilter('construction_engineering_realestate')">
+          <span class="ind-tile-icon">🏗️</span>
+          <span class="ind-tile-label">Engineering</span>
+          <span class="ind-tile-count" id="ind-count-eng">0 jobs</span>
+        </div>
+        <div class="industry-tile" onclick="setIndustryFilter('education_training')">
+          <span class="ind-tile-icon">🎓</span>
+          <span class="ind-tile-label">Education</span>
+          <span class="ind-tile-count" id="ind-count-edu">0 jobs</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="testimonials-section">
-    <div class="section-head" style="text-align:center; display:flex; flex-direction:column; align-items:center;">
-      <div class="section-tag">Testimonials</div>
-      <h2 class="section-title">What Job Seekers Say About Us</h2>
+  <!-- ══ JOB LISTINGS GRID ══ -->
+  <section class="jobs-section-new">
+    <div class="jobs-section-inner">
+      <div id="jobsGrid" class="jobs-grid-new">
+        <div style="text-align:center;padding:60px 20px;color:#6b7280;grid-column:1/-1;">
+          <div style="font-size:40px;margin-bottom:12px;">🔍</div>
+          <div style="font-weight:700;font-size:16px;">Loading jobs...</div>
+        </div>
+      </div>
+      <!-- Pagination -->
+      <div id="jobsPagination" class="jobs-pagination"></div>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Kennedia helped me land my dream role in banking within two weeks. The platform is incredibly easy to use and the jobs are all legitimate.</p>
-        <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Adaeze O.</div><div class="testi-role">Relationship Manager, Lagos</div></div></div>
+  </section>
+
+  <!-- ══ FEATURED BANNER SLIDER ══ -->
+  <section class="featured-banner-section">
+    <div class="featured-banner-slider" id="featuredSlider">
+      <div class="featured-slide active" style="background-image:url('/static/images/background_img3.jpg')">
+        <div class="featured-slide-overlay"></div>
+        <div class="featured-slide-content">
+          <h2>Monthly Talent<br>Acquisition Drive</h2>
+          <p>Join our ongoing recruitment campaign and get matched with top employers this month.</p>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <button class="feat-btn-primary" onclick="showPage('job-search')">Submit your CV</button>
+            <button class="feat-btn-secondary" onclick="showPage('about')">Learn More</button>
+          </div>
+        </div>
       </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">I had been job hunting for months. After registering with Kennedia Jobs, I received three interview calls in the first week. Outstanding service.</p>
-        <div class="testi-author"><div class="testi-avatar">E</div><div><div class="testi-name">Emeka N.</div><div class="testi-role">Sales Executive, Abuja</div></div></div>
+      <div class="featured-slide" style="background-image:url('/static/images/background_img1.jpg')">
+        <div class="featured-slide-overlay"></div>
+        <div class="featured-slide-content">
+          <h2>Get Qualified as a<br>Certified Professional</h2>
+          <p>Build the skills employers are looking for with our career training programmes.</p>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <button class="feat-btn-primary" onclick="showPage('career-training')">Enrol Now</button>
+            <button class="feat-btn-secondary" onclick="showPage('services')">Learn More</button>
+          </div>
+        </div>
       </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">The team at Kennedia Consulting went above and beyond to match me with a role that fit my skills and career aspirations perfectly.</p>
-        <div class="testi-author"><div class="testi-avatar">F</div><div><div class="testi-name">Fatima B.</div><div class="testi-role">HR Executive, Kano</div></div></div>
+      <div class="featured-slide" style="background-image:url('/static/images/background_img2.jpg')">
+        <div class="featured-slide-overlay"></div>
+        <div class="featured-slide-content">
+          <h2>Post a Job<br>For Free Today</h2>
+          <p>Get your vacancies in front of thousands of qualified candidates across Nigeria.</p>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <button class="feat-btn-primary" onclick="showPage('employers')">Post a Job</button>
+            <button class="feat-btn-secondary" onclick="showPage('employers')">Learn More</button>
+          </div>
+        </div>
       </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Highly professional. The jobs posted here are well-vetted and the application process is seamless. I recommend Kennedia to every job seeker.</p>
-        <div class="testi-author"><div class="testi-avatar">C</div><div><div class="testi-name">Chidi A.</div><div class="testi-role">Finance Officer, Port Harcourt</div></div></div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">From CV review to placement, Kennedia made the whole process smooth. I'm now in a role that pays double what I was earning before.</p>
-        <div class="testi-author"><div class="testi-avatar">T</div><div><div class="testi-name">Taiwo S.</div><div class="testi-role">Business Developer, Ibadan</div></div></div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">The outsourcing team exceeded our expectations entirely. Their professionalism and responsiveness is unmatched in the industry.</p>
-        <div class="testi-author"><div class="testi-avatar">U</div><div><div class="testi-name">Uche M.</div><div class="testi-role">Operations Manager, Enugu</div></div></div>
+      <!-- Dots -->
+      <div class="featured-dots">
+        <span class="feat-dot active" onclick="goToFeatSlide(0)"></span>
+        <span class="feat-dot" onclick="goToFeatSlide(1)"></span>
+        <span class="feat-dot" onclick="goToFeatSlide(2)"></span>
       </div>
     </div>
   </section>
 
-  <div class="partners-strip">
-    <div class="partners-label">Trusted by Leading Companies Across Nigeria</div>
-    <div class="partners-marquee-wrap">
-      <div class="partners-marquee" id="partnersMarquee1">
-        <img src="/static/images/c1.png" alt="Partner 1" class="partner-img">
-        <img src="/static/images/c2.png" alt="Partner 2" class="partner-img">
-        <img src="/static/images/c2.png" alt="Partner 2" class="partner-img">
-        <img src="/static/images/c3.png" alt="Partner 3" class="partner-img">
-        <img src="/static/images/c4.png" alt="Partner 4" class="partner-img">
-        <img src="/static/images/c5.png" alt="Partner 5" class="partner-img">
-        <img src="/static/images/c6.png" alt="Partner 6" class="partner-img">
-        <img src="/static/images/c1.png" alt="Partner 1" class="partner-img">
-        <img src="/static/images/c2.png" alt="Partner 2" class="partner-img">
-        <img src="/static/images/c3.png" alt="Partner 3" class="partner-img">
-        <img src="/static/images/c4.png" alt="Partner 4" class="partner-img">
-        <img src="/static/images/c5.png" alt="Partner 5" class="partner-img">
-        <img src="/static/images/c6.png" alt="Partner 6" class="partner-img">
+  <!-- ══ STATS BAR ══ -->
+  <section class="stats-section">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num" data-target="3000">0</div>
+        <div class="stat-label">Candidates Placed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="500">0</div>
+        <div class="stat-label">Active Vacancies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="200">0</div>
+        <div class="stat-label">Partner Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="36">0</div>
+        <div class="stat-label">States Covered</div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- ══ HOW IT WORKS ══ -->
+  <section class="how-section">
+    <div class="how-inner">
+      <div class="how-text">
+        <div class="section-tag">HOW IT WORKS</div>
+        <h2 class="how-title">We Make the Job Search<br><em>Simple, Safe & Fast</em></h2>
+        <div class="how-steps">
+          <div class="how-step-item">
+            <div class="how-step-icon">🔍</div>
+            <div>
+              <div class="how-step-title">Simple</div>
+              <div class="how-step-desc">We combine jobs from most sources on a single page — one search, all opportunities, zero hassle.</div>
+            </div>
+          </div>
+          <div class="how-step-item">
+            <div class="how-step-icon">🛡️</div>
+            <div>
+              <div class="how-step-title">Safe</div>
+              <div class="how-step-desc">We validate every job post, blocking spam, phishing, and inappropriate publications before they reach you.</div>
+            </div>
+          </div>
+          <div class="how-step-item">
+            <div class="how-step-icon">⚡</div>
+            <div>
+              <div class="how-step-title">Fast</div>
+              <div class="how-step-desc">We suggest the best matches and keep you updated with new opportunities as soon as they go live.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="how-image">
+        <img src="/static/images/how-img.png" alt="How Kennedia Works" onerror="this.parentElement.style.display='none'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PARTNER LOGOS ══ -->
+  <section class="partners-section">
+    <div class="section-tag" style="text-align:center;display:block;margin-bottom:16px;">OUR PARTNERS</div>
+    <div class="partners-track">
+      <img src="/static/images/c1.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c2.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c3.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c4.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c5.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c6.png" alt="Partner" class="partner-img">
+    </div>
+  </section>
 
 </div>
 
@@ -2152,14 +2676,32 @@ input:focus, select:focus, textarea:focus {
           <div class="form-group" style="margin:0;"><label>Job Title *</label><input type="text" id="emp-job-title" placeholder="e.g. Senior Accountant"></div>
           <div class="form-group" style="margin:0;"><label>Industry *</label>
             <select id="emp-industry">
+
               <option value="">Select industry</option>
-              <option value="banking_finance">Banking & Finance</option>
-              <option value="technology">Technology</option>
-              <option value="fmcg_retail">FMCG / Retail</option>
-              <option value="oil_gas">Oil & Gas</option>
-              <option value="healthcare">Healthcare</option>
-              <option value="hr_consulting">HR / Consulting</option>
-              <option value="manufacturing">Manufacturing</option>
+              <option value="accounting_finance_banking">Accounting, Finance & Banking</option>
+              <option value="agriculture_agribusiness">Agriculture & Agribusiness</option>
+              <option value="arts_entertainment_media">Arts, Entertainment & Media</option>
+              <option value="automotive_aviation_transport">Automotive, Aviation & Transportation</option>
+              <option value="construction_engineering_realestate">Construction, Engineering & Real Estate</option>
+              <option value="consumer_goods_retail_ecommerce">Consumer Goods, Retail & E-commerce</option>
+              <option value="consulting_professional_services">Consulting & Professional Services</option>
+              <option value="education_training">Education & Training</option>
+              <option value="energy_utilities_mining_oilgas">Energy, Utilities, Mining & Oil & Gas</option>
+              <option value="event_hospitality_tourism">Event Management, Hospitality & Tourism</option>
+              <option value="fashion_beauty_lifestyle">Fashion, Beauty & Lifestyle</option>
+              <option value="food_beverage">Food & Beverage</option>
+              <option value="government_public_admin">Government & Public Administration</option>
+              <option value="healthcare_medical_pharma">Healthcare, Medical & Pharmaceutical</option>
+              <option value="human_resources_recruitment">Human Resources & Recruitment</option>
+              <option value="information_technology_telecom">Information Technology & Telecommunications</option>
+              <option value="legal_services">Legal Services</option>
+              <option value="logistics_supply_chain">Logistics, Supply Chain & Warehousing</option>
+              <option value="manufacturing_production">Manufacturing & Production</option>
+              <option value="nonprofit_ngo_social">Nonprofit, NGO & Social Services</option>
+              <option value="research_science_lab">Research, Science & Laboratory Services</option>
+              <option value="sales_marketing_pr">Sales, Marketing & Public Relations</option>
+              <option value="security_defense">Security & Defense</option>
+              <option value="web_digital_creative">Web, Digital Media & Creative Services</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -2272,6 +2814,10 @@ input:focus, select:focus, textarea:focus {
           <!-- Filled dynamically by showApplyPageFromData() -->
           <div class="apply-section-label">Job Summary</div>
           <p id="applyJobSummary">We are seeking dynamic and motivated individuals to join our team.</p>
+          <div id="applyJobResponsibilitiesSection" style="display:none;">
+            <div class="apply-section-label" style="margin-top:18px;">Responsibilities</div>
+            <ul id="applyJobResponsibilitiesList"></ul>
+          </div>
           <div class="apply-section-label" style="margin-top:18px;">Key Requirements</div>
           <ul id="applyJobReqList">
             <li>Must be ready to resume immediately.</li>
@@ -4218,6 +4764,15 @@ async function showApplyPageFull(jobData) {
     ? full.description.replace(/<[^>]+>/g, '').substring(0, 600)
     : 'We are seeking a talented and motivated ' + title + ' to join our team at ' + company + '.';
 
+  // Responsibilities
+  const respSection = document.getElementById('applyJobResponsibilitiesSection');
+  const respList = document.getElementById('applyJobResponsibilitiesList');
+  if (respSection && respList && full.responsibilities && full.responsibilities.trim()) {
+    const lines = full.responsibilities.replace(/<[^>]+>/g, '').split(/[\n\r]+/).filter(l => l.trim());
+    respList.innerHTML = lines.map(l => `<li>${escHtml(l.trim())}</li>`).join('');
+    respSection.style.display = 'block';
+  } else if (respSection) { respSection.style.display = 'none'; }
+
   const reqList = document.getElementById('applyJobReqList');
   if (reqList && full.requirements && full.requirements.trim()) {
     const lines = full.requirements.replace(/<[^>]+>/g, '').split(/[\n\r]+/).filter(l => l.trim());
@@ -4927,14 +5482,41 @@ let _adminJobsCache = [];     // holds latest fetched jobs
 let _adminJobViewId = null;   // for "edit from view modal"
 
 const INDUSTRY_LABELS = {
+  accounting_finance_banking: 'Accounting, Finance & Banking',
+  agriculture_agribusiness: 'Agriculture & Agribusiness',
+  arts_entertainment_media: 'Arts, Entertainment & Media',
+  automotive_aviation_transport: 'Automotive, Aviation & Transportation',
+  construction_engineering_realestate: 'Construction, Engineering & Real Estate',
+  consumer_goods_retail_ecommerce: 'Consumer Goods, Retail & E-commerce',
+  consulting_professional_services: 'Consulting & Professional Services',
+  education_training: 'Education & Training',
+  energy_utilities_mining_oilgas: 'Energy, Utilities, Mining & Oil & Gas',
+  event_hospitality_tourism: 'Event Management, Hospitality & Tourism',
+  fashion_beauty_lifestyle: 'Fashion, Beauty & Lifestyle',
+  food_beverage: 'Food & Beverage',
+  government_public_admin: 'Government & Public Administration',
+  healthcare_medical_pharma: 'Healthcare, Medical & Pharmaceutical',
+  human_resources_recruitment: 'Human Resources & Recruitment',
+  information_technology_telecom: 'Information Technology & Telecommunications',
+  legal_services: 'Legal Services',
+  logistics_supply_chain: 'Logistics, Supply Chain & Warehousing',
+  manufacturing_production: 'Manufacturing & Production',
+  nonprofit_ngo_social: 'Nonprofit, NGO & Social Services',
+  research_science_lab: 'Research, Science & Laboratory Services',
+  sales_marketing_pr: 'Sales, Marketing & Public Relations',
+  security_defense: 'Security & Defense',
+  web_digital_creative: 'Web, Digital Media & Creative Services',
+  other: 'Other',
+  // Legacy values
   banking_finance: 'Banking & Finance', technology: 'Technology',
   fmcg_retail: 'FMCG / Retail', oil_gas: 'Oil & Gas',
   healthcare: 'Healthcare', hr_consulting: 'HR / Consulting',
-  manufacturing: 'Manufacturing', other: 'Other'
+  manufacturing: 'Manufacturing',
 };
 const JOB_TYPE_LABELS = {
   full_time: 'Full Time', part_time: 'Part Time',
-  contract: 'Contract', internship: 'Internship', remote: 'Remote'
+  contract: 'Contract', internship: 'Internship',
+  remote: 'Remote', hybrid: 'Hybrid'
 };
 const STATUS_CLASSES = { active: 'st-active', draft: 'st-pending', closed: 'st-inactive', expired: 'st-inactive' };
 
@@ -4990,7 +5572,7 @@ function openAdminJobForm() {
   document.getElementById('adminJobFormTitle').textContent = 'Post a New Job';
   document.getElementById('adminJobEditId').value = '';
   // Clear fields
-  ['ajf_title','ajf_company','ajf_location','ajf_salary','ajf_salary_display','ajf_description','ajf_requirements','ajf_benefits','ajf_deadline'].forEach(id => {
+  ['ajf_title','ajf_company','ajf_location','ajf_salary','ajf_salary_display','ajf_description','ajf_responsibilities','ajf_requirements','ajf_benefits','ajf_deadline'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = id === 'ajf_company' ? 'Kennedia Consulting' : '';
   });
   document.getElementById('ajf_industry').value = 'banking_finance';
@@ -5038,9 +5620,11 @@ async function openAdminJobFormEdit(id) {
       if (idx >= 0) _adminJobsCache[idx] = Object.assign({}, _adminJobsCache[idx], full);
       // Populate fields that were missing from list
       set('ajf_description', full.description || '');
+      set('ajf_responsibilities', full.responsibilities || '');
       set('ajf_requirements', full.requirements || '');
       set('ajf_benefits', full.benefits || '');
       if (full.experience_required) document.getElementById('ajf_experience_required').value = full.experience_required;
+      if (full.qualification_required) document.getElementById('ajf_qualification_required').value = full.qualification_required;
     }
   } catch(e) {}
 }
@@ -5070,8 +5654,11 @@ async function saveAdminJob(forceStatus) {
     salary: salaryRaw ? parseFloat(salaryRaw) : null,
     salary_display: document.getElementById('ajf_salary_display').value.trim(),
     description,
+    responsibilities: document.getElementById('ajf_responsibilities').value.trim(),
     requirements: document.getElementById('ajf_requirements').value.trim(),
     benefits: document.getElementById('ajf_benefits').value.trim(),
+    experience_required: document.getElementById('ajf_experience_required').value,
+    qualification_required: document.getElementById('ajf_qualification_required').value,
     deadline: document.getElementById('ajf_deadline').value || null,
     status: forceStatus || document.getElementById('ajf_status').value,
   };
@@ -5792,87 +6379,114 @@ function showApplyPageById(id, title, company, type, ind, salary) {
   }
 }
 
+function getTypeBadgeClass(type) {
+  if (!type) return 'badge-full';
+  const t = (type+'').toLowerCase();
+  if (t.includes('part')) return 'badge-part';
+  if (t.includes('contract')) return 'badge-contract';
+  if (t.includes('remote')) return 'badge-remote';
+  if (t.includes('hybrid')) return 'badge-hybrid';
+  if (t.includes('intern')) return 'badge-internship';
+  return 'badge-full';
+}
+function getIndustryIcon(ind) {
+  if (!ind) return '🏢';
+  const i = (ind+'').toLowerCase();
+  if (i.includes('tech')||i.includes('it ')||i.includes('telecom')) return '💻';
+  if (i.includes('finance')||i.includes('banking')||i.includes('account')) return '🏦';
+  if (i.includes('health')||i.includes('medical')||i.includes('pharma')) return '🏥';
+  if (i.includes('oil')||i.includes('gas')||i.includes('energy')||i.includes('mining')) return '⛽';
+  if (i.includes('hr')||i.includes('recruit')||i.includes('human')) return '👥';
+  if (i.includes('market')||i.includes('sales')||i.includes('pr')) return '📈';
+  if (i.includes('edu')||i.includes('train')) return '🎓';
+  if (i.includes('legal')||i.includes('law')) return '⚖️';
+  if (i.includes('construct')||i.includes('engin')||i.includes('real')) return '🏗️';
+  if (i.includes('food')||i.includes('beverage')) return '🍽️';
+  if (i.includes('fashion')||i.includes('beauty')) return '👗';
+  if (i.includes('media')||i.includes('arts')||i.includes('entertain')) return '🎬';
+  if (i.includes('logistic')||i.includes('supply')||i.includes('warehouse')) return '📦';
+  if (i.includes('manufactur')||i.includes('production')) return '🏭';
+  if (i.includes('agri')||i.includes('farm')) return '🌾';
+  if (i.includes('security')||i.includes('defense')) return '🛡️';
+  if (i.includes('nonprofit')||i.includes('ngo')) return '🤝';
+  if (i.includes('government')||i.includes('public')) return '🏛️';
+  return '🏢';
+}
+function timeAgo(dateStr) {
+  if (!dateStr) return '';
+  const diff = Math.floor((new Date() - new Date(dateStr)) / 1000);
+  if (diff < 60) return 'Just now';
+  if (diff < 3600) return Math.floor(diff/60) + ' mins ago';
+  if (diff < 86400) return Math.floor(diff/3600) + ' hrs ago';
+  if (diff < 604800) return Math.floor(diff/86400) + ' days ago';
+  return new Date(dateStr).toLocaleDateString('en-GB', {day:'numeric',month:'short'});
+}
+function updateIndustryTileCounts() {
+  const source = (typeof apiJobs !== 'undefined' && apiJobs.length) ? apiJobs : [];
+  const counts = {};
+  source.forEach(j => { if (j.industry) counts[j.industry] = (counts[j.industry]||0)+1; });
+  const map = {
+    'ind-count-it': 'information_technology_telecom',
+    'ind-count-fin': 'accounting_finance_banking',
+    'ind-count-health': 'healthcare_medical_pharma',
+    'ind-count-mkt': 'sales_marketing_pr',
+    'ind-count-oil': 'energy_utilities_mining_oilgas',
+    'ind-count-hr': 'human_resources_recruitment',
+    'ind-count-eng': 'construction_engineering_realestate',
+    'ind-count-edu': 'education_training',
+  };
+  Object.entries(map).forEach(([elId, key]) => {
+    const el = document.getElementById(elId);
+    if (el) { const c = counts[key]||0; el.textContent = c + (c===1?' job':' jobs'); }
+  });
+}
+function setIndustryFilter(ind) {
+  const sel = document.getElementById('filterInd');
+  if (sel) { sel.value = ind; filterJobs(); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 function renderJobs() {
   const grid = document.getElementById('jobsGrid');
   if (!grid) return;
-
   const start = (currentPage - 1) * PER_PAGE;
   const slice = filteredJobs.slice(start, start + PER_PAGE);
-
-  grid.innerHTML = slice.map(j => {
-    const _cardNow = new Date(); _cardNow.setHours(0,0,0,0);
-    const _cardExpired = j.status === 'expired' || j.status === 'closed' ||
-      (j.deadline && new Date(j.deadline) <= _cardNow);
-
-    const needsRegister = currentUser ? false : (j.requires_registration !== undefined ? j.requires_registration : (j.salary && j.salary >= 500000));
-    const badge = _cardExpired
-      ? '<span class="apply-badge" style="background:#f3f4f6;color:#6b7280;border:1px solid #e5e7eb;">⛔ Applications Closed</span>'
-      : needsRegister
-        ? '<span class="apply-badge badge-register">Register to Apply</span>'
-        : '<span class="apply-badge badge-easy">Easy Apply</span>';
-    const salaryHtml = j.salary ? `<div class="job-salary">💰 ${j.salary_display || formatSalary(j.salary)}</div>` : '';
-    const logoSrc = j.logo || '/static/images/logo.png';
-    const escapedTitle = (j.title||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
-    const applyFn = j.id
-      ? `showApplyPageById(${j.id},'${escapedTitle}','${(j.company||'').replace(/'/g,"\\'")}','${j.type||'Full time'}','${(j.ind||'').replace(/'/g,"\\'")}',${j.salary||0})`
-      : `showApplyPage('${escapedTitle}','${(j.company||'').replace(/'/g,"\\'")}','${j.type||'Full time'}','${(j.ind||'').replace(/'/g,"\\'")}',${j.salary||0})`;
-
-    const cardStyle = _cardExpired ? 'opacity:0.65;filter:grayscale(0.3);' : '';
-    const btnHtml = _cardExpired
-      ? '<button class="job-apply" disabled style="background:#e5e7eb;color:#9ca3af;cursor:not-allowed;">⛔ Applications Closed</button>'
-      : `<button class="job-apply" onclick="${applyFn}">${needsRegister ? '🔒 Register &amp; Apply' : '⚡ Easy Apply'}</button>`;
-
-    return `
-    <div class="job-card" style="${cardStyle}">
-      <div class="job-card-top">
-        <div class="job-logo"><img src="${logoSrc}" onerror="this.style.display='none';this.parentElement.textContent='K';" alt="logo"></div>
-        <div class="job-info">
-          ${badge}
-          <div class="job-title">${j.title}</div>
-          <div class="job-company">${j.company}</div>
-        </div>
-      </div>
-      <div class="job-meta">
-        <span class="job-tag tag-loc">📍 ${j.loc}</span>
-        <span class="job-tag tag-ind">${j.ind}</span>
-        <span class="job-tag tag-type">⏱ ${j.type}</span>
-      </div>
-      ${salaryHtml}
-      <p class="job-desc">${j.desc}</p>
-      ${btnHtml}
-    </div>
-  `}).join('');
-
+  if (!slice.length) {
+    grid.innerHTML = `<div style="text-align:center;padding:60px 20px;color:#6b7280;grid-column:1/-1;"><div style="font-size:40px;margin-bottom:12px;">📭</div><div style="font-weight:700;font-size:16px;">No jobs found</div><div style="font-size:13px;margin-top:6px;">Try adjusting your filters or check back later.</div></div>`;
+  } else {
+    grid.innerHTML = slice.map(j => {
+      const _now = new Date(); _now.setHours(0,0,0,0);
+      const expired = j.status==='expired'||j.status==='closed'||(j.deadline&&new Date(j.deadline)<=_now);
+      const needsReg = !currentUser&&(j.requires_registration||(j.salary&&j.salary>=500000));
+      const typeLabel = JOB_TYPE_LABELS[j.type]||j.type||'Full Time';
+      const badgeClass = getTypeBadgeClass(j.type);
+      const indIcon = getIndustryIcon(j.ind||j.industry||'');
+      const escapedTitle = (j.title||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+      const applyFn = j.id
+        ? `showApplyPageById(${j.id},'${escapedTitle}','${(j.company||'').replace(/'/g,"\\'")}','${j.type||"Full time"}','${(j.ind||'').replace(/'/g,"\\'")}',${j.salary||0})`
+        : `showApplyPage('${escapedTitle}','${(j.company||'').replace(/'/g,"\\'")}','${j.type||"Full time"}','${(j.ind||'').replace(/'/g,"\\'")}',${j.salary||0})`;
+      const cardOpacity = expired ? 'opacity:0.6;' : '';
+      const btnLabel = expired ? '⛔ Applications Closed' : (needsReg ? '🔒 Register & Apply' : 'Apply Now');
+      const logoSrc = j.logo||'';
+      return `<div class="job-card-new" style="${cardOpacity}" ${!expired?`onclick="${applyFn}"`:''}><div class="job-card-new-top"><div class="job-card-new-logo">${logoSrc?`<img src="${logoSrc}" alt="logo" onerror="this.style.display='none';this.parentElement.textContent='${indIcon}';">`:indIcon}</div><span class="job-type-badge ${badgeClass}">${escHtml(typeLabel).toUpperCase()}</span></div><div class="job-card-new-title">${escHtml(j.title||'')}</div><div class="job-card-new-company">${escHtml(j.company||'Kennedia Consulting')}</div><div class="job-card-new-desc">${escHtml((j.desc||'').substring(0,120))}${(j.desc||'').length>120?'&hellip;':''}</div><div class="job-card-new-meta"><span>📍 ${escHtml(j.loc||'Nigeria')}</span><span>⏱ ${timeAgo(j.created_at)}</span></div><button class="job-card-new-apply" ${expired?'disabled':`onclick="event.stopPropagation();${applyFn}"`}>${btnLabel}</button></div>`;
+    }).join('');
+  }
   const total = Math.ceil(filteredJobs.length / PER_PAGE);
-  const pag = document.getElementById('pagination');
-  if (!pag) return;
-  pag.innerHTML = '';
-
-  if (total > 1) {
-    let html = '';
-    if (currentPage > 1) html += `<button class="pg-btn" onclick="goToJobPage(${currentPage - 1})">← Prev</button>`;
-    for (let i = 1; i <= total; i++) {
-      if (i === 1 || i === total || (i >= currentPage - 2 && i <= currentPage + 2)) {
-        html += `<button class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="goToJobPage(${i})">${i}</button>`;
-      } else if (i === currentPage - 3 || i === currentPage + 3) {
-        html += `<span style="padding:8px 4px;color:var(--muted);">…</span>`;
+  const pag = document.getElementById('jobsPagination')||document.getElementById('pagination');
+  if (pag) {
+    if (total <= 1) { pag.innerHTML = ''; }
+    else {
+      let html = '';
+      if (currentPage>1) html += `<button onclick="goToJobPage(${currentPage-1})">← Prev</button>`;
+      for (let i=1;i<=total;i++) {
+        if (i===1||i===total||(i>=currentPage-2&&i<=currentPage+2)) html += `<button class="${i===currentPage?'active':''}" onclick="goToJobPage(${i})">${i}</button>`;
+        else if (i===currentPage-3||i===currentPage+3) html += `<span style="padding:8px 4px;color:#9ca3af;">…</span>`;
       }
+      if (currentPage<total) html += `<button onclick="goToJobPage(${currentPage+1})">Next →</button>`;
+      pag.innerHTML = html;
     }
-    if (currentPage < total) html += `<button class="pg-btn" onclick="goToJobPage(${currentPage + 1})">Next →</button>`;
-    pag.innerHTML = html;
   }
-
-  // Update jobs count
-  const countEl = document.getElementById('jobs-count');
-  if (countEl) {
-    const s = (currentPage - 1) * PER_PAGE + 1;
-    const e = Math.min(currentPage * PER_PAGE, filteredJobs.length);
-    countEl.textContent = filteredJobs.length > 0 ? `Showing ${s}–${e} of ${filteredJobs.length} jobs` : 'No jobs found';
-  }
-
-  if (typeof observeJobCards === 'function') observeJobCards();
+  updateIndustryTileCounts();
 }
-
 function goToJobPage(p) {
   currentPage = p;
   renderJobs();
@@ -6968,13 +7582,30 @@ function goToSlide(n) {
   if (_sliderSlides[_sliderCurrent]) _sliderSlides[_sliderCurrent].classList.add('active');
   if (_sliderDots[_sliderCurrent])   _sliderDots[_sliderCurrent].classList.add('active');
 }
-
 function nextSlide() { goToSlide(_sliderCurrent + 1); }
 function prevSlide()  { goToSlide(_sliderCurrent - 1); }
-
 function _startSliderAuto() {
   clearInterval(_sliderAutoTimer);
   _sliderAutoTimer = setInterval(nextSlide, 4000);
+}
+
+// ── Featured banner slider ──
+let _featCurrent = 0;
+let _featTimer = null;
+function goToFeatSlide(n) {
+  const slides = Array.from(document.querySelectorAll('.featured-slide'));
+  const dots   = Array.from(document.querySelectorAll('.feat-dot'));
+  if (!slides.length) return;
+  slides.forEach((s,i) => { s.classList.toggle('active', i===n); s.style.zIndex = i===n?1:0; });
+  dots.forEach((d,i)   => d.classList.toggle('active', i===n));
+  _featCurrent = n;
+}
+function _startFeatAuto() {
+  clearInterval(_featTimer);
+  _featTimer = setInterval(() => {
+    const slides = document.querySelectorAll('.featured-slide');
+    goToFeatSlide((_featCurrent + 1) % slides.length);
+  }, 5000);
 }
 
 // ── SCROLL NAV EFFECT ──
@@ -6988,25 +7619,13 @@ window.addEventListener('scroll', () => {
 
 // ── SINGLE DOMContentLoaded ──
 document.addEventListener('DOMContentLoaded', () => {
-  // Render jobs and blogs
   renderJobs();
   renderBlogs('all');
   animateCounters();
 
-  // Init slider
-  _sliderSlides = Array.from(document.querySelectorAll('#heroSlider .hero-slide'));
-  _sliderDots   = Array.from(document.querySelectorAll('#heroSlider .hero-dot'));
-  _sliderCurrent = 0;
-
-  const sliderEl = document.getElementById('heroSlider');
-  if (sliderEl) {
-    sliderEl.addEventListener('mouseenter', () => clearInterval(_sliderAutoTimer));
-    sliderEl.addEventListener('mouseleave', _startSliderAuto);
-    sliderEl.addEventListener('touchstart',  () => clearInterval(_sliderAutoTimer), { passive: true });
-    sliderEl.addEventListener('touchend',    _startSliderAuto, { passive: true });
-  }
-
-  if (_sliderSlides.length > 1) _startSliderAuto();
+  // Init featured banner slider
+  goToFeatSlide(0);
+  _startFeatAuto();
 
   // Scroll reveal observer
   const revealObs = new IntersectionObserver((entries) => {
@@ -7035,13 +7654,31 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="admin-form-group"><label>Location *</label><input type="text" id="ajf_location" placeholder="e.g. Lagos, Abuja"></div>
       <div class="admin-form-group"><label>Industry *</label>
         <select id="ajf_industry">
-          <option value="banking_finance">Banking & Finance</option>
-          <option value="technology">Technology</option>
-          <option value="fmcg_retail">FMCG / Retail</option>
-          <option value="oil_gas">Oil & Gas</option>
-          <option value="healthcare">Healthcare</option>
-          <option value="hr_consulting">Human Resources / Consulting</option>
-          <option value="manufacturing">Manufacturing</option>
+
+          <option value="accounting_finance_banking">Accounting, Finance & Banking</option>
+          <option value="agriculture_agribusiness">Agriculture & Agribusiness</option>
+          <option value="arts_entertainment_media">Arts, Entertainment & Media</option>
+          <option value="automotive_aviation_transport">Automotive, Aviation & Transportation</option>
+          <option value="construction_engineering_realestate">Construction, Engineering & Real Estate</option>
+          <option value="consumer_goods_retail_ecommerce">Consumer Goods, Retail & E-commerce</option>
+          <option value="consulting_professional_services">Consulting & Professional Services</option>
+          <option value="education_training">Education & Training</option>
+          <option value="energy_utilities_mining_oilgas">Energy, Utilities, Mining & Oil & Gas</option>
+          <option value="event_hospitality_tourism">Event Management, Hospitality & Tourism</option>
+          <option value="fashion_beauty_lifestyle">Fashion, Beauty & Lifestyle</option>
+          <option value="food_beverage">Food & Beverage</option>
+          <option value="government_public_admin">Government & Public Administration</option>
+          <option value="healthcare_medical_pharma">Healthcare, Medical & Pharmaceutical</option>
+          <option value="human_resources_recruitment">Human Resources & Recruitment</option>
+          <option value="information_technology_telecom">Information Technology & Telecommunications</option>
+          <option value="legal_services">Legal Services</option>
+          <option value="logistics_supply_chain">Logistics, Supply Chain & Warehousing</option>
+          <option value="manufacturing_production">Manufacturing & Production</option>
+          <option value="nonprofit_ngo_social">Nonprofit, NGO & Social Services</option>
+          <option value="research_science_lab">Research, Science & Laboratory Services</option>
+          <option value="sales_marketing_pr">Sales, Marketing & Public Relations</option>
+          <option value="security_defense">Security & Defense</option>
+          <option value="web_digital_creative">Web, Digital Media & Creative Services</option>
           <option value="other">Other</option>
         </select>
       </div>
@@ -7054,23 +7691,41 @@ document.addEventListener('DOMContentLoaded', () => {
           <option value="contract">Contract</option>
           <option value="internship">Internship</option>
           <option value="remote">Remote</option>
+          <option value="hybrid">Hybrid</option>
         </select>
       </div>
       <div class="admin-form-group"><label>Experience Required</label>
         <select id="ajf_experience_required">
           <option value="">Any</option>
-          <option value="0-1">0–1 years (Entry Level)</option>
-          <option value="2-4">2–4 years</option>
-          <option value="5-8">5–8 years</option>
-          <option value="9+">9+ years (Senior)</option>
+          <option value="trainee">Trainee – 0 years</option>
+          <option value="entry">Entry Level – 1–2 years</option>
+          <option value="mid">Mid-level – 3–6 years</option>
+          <option value="senior_mid">Senior Mid – 7–10 years</option>
+          <option value="senior">Senior/Managerial – 12 years+</option>
         </select>
       </div>
+    </div>
+    <div class="admin-form-row">
+      <div class="admin-form-group"><label>Qualification Required</label>
+        <select id="ajf_qualification_required">
+          <option value="">Any</option>
+          <option value="secondary">Secondary School Certificate or Equivalent</option>
+          <option value="certificate">Certificate / Vocational Qualification</option>
+          <option value="diploma">Diploma (ND, OND, NCE, HND)</option>
+          <option value="bachelors">Bachelor's Degree</option>
+          <option value="postgraduate">Postgraduate Qualification (PGD, Master's, Doctorate)</option>
+          <option value="professional">Professional Certification / Fellowship</option>
+          <option value="none">No Formal Qualification Required</option>
+        </select>
+      </div>
+      <div class="admin-form-group"><label>Employer Notification Email</label><input type="email" id="ajf_employer_email" placeholder="employer@company.com"></div>
     </div>
     <div class="admin-form-row">
       <div class="admin-form-group"><label>Monthly Salary (₦)</label><input type="number" id="ajf_salary" placeholder="e.g. 350000" min="0"></div>
       <div class="admin-form-group"><label>Salary Display Override</label><input type="text" id="ajf_salary_display" placeholder='e.g. "₦400k – ₦600k"'></div>
     </div>
     <div class="admin-form-group"><label>Job Description *</label><textarea id="ajf_description" rows="5" placeholder="Describe the role and responsibilities…"></textarea></div>
+    <div class="admin-form-group"><label>Responsibilities</label><textarea id="ajf_responsibilities" rows="4" placeholder="Key duties and day-to-day responsibilities…"></textarea></div>
     <div class="admin-form-group"><label>Requirements</label><textarea id="ajf_requirements" rows="4" placeholder="Qualifications and skills required…"></textarea></div>
     <div class="admin-form-group"><label>Benefits</label><textarea id="ajf_benefits" rows="3" placeholder="Perks, HMO, pension, bonuses…"></textarea></div>
     <div class="admin-form-row">
