@@ -5,12 +5,6 @@ from django.core.validators import MinValueValidator
 
 
 def cv_upload_path(instance, filename):
-    """
-    Organise uploaded CVs by job:
-    applications/cvs/job_{id}_{slug}/filename
-    e.g. applications/cvs/job_12_finance-manager/amaka_okafor_cv.pdf
-    """
-    # Slugify the job title — remove special chars, replace spaces with hyphens
     job_title = re.sub(r'[^\w\s-]', '', instance.job.title.lower())
     job_title = re.sub(r'[\s_]+', '-', job_title).strip('-')[:50]
     folder = f'applications/cvs/job_{instance.job.id}_{job_title}'
@@ -24,15 +18,33 @@ class Job(models.Model):
         ('contract', 'Contract'),
         ('internship', 'Internship'),
         ('remote', 'Remote'),
+        ('hybrid', 'Hybrid'),
     ]
     INDUSTRY_CHOICES = [
-        ('banking_finance', 'Banking & Finance'),
-        ('technology', 'Technology'),
-        ('fmcg_retail', 'FMCG / Retail'),
-        ('oil_gas', 'Oil & Gas'),
-        ('healthcare', 'Healthcare'),
-        ('hr_consulting', 'Human Resources / Consulting'),
-        ('manufacturing', 'Manufacturing'),
+        ('accounting_finance_banking', 'Accounting, Finance & Banking'),
+        ('agriculture_agribusiness', 'Agriculture & Agribusiness'),
+        ('arts_entertainment_media', 'Arts, Entertainment & Media'),
+        ('automotive_aviation_transport', 'Automotive, Aviation & Transportation'),
+        ('construction_engineering_realestate', 'Construction, Engineering & Real Estate'),
+        ('consumer_goods_retail_ecommerce', 'Consumer Goods, Retail & E-commerce'),
+        ('consulting_professional_services', 'Consulting & Professional Services'),
+        ('education_training', 'Education & Training'),
+        ('energy_utilities_mining_oilgas', 'Energy, Utilities, Mining & Oil & Gas'),
+        ('event_hospitality_tourism', 'Event Management, Hospitality & Tourism'),
+        ('fashion_beauty_lifestyle', 'Fashion, Beauty & Lifestyle'),
+        ('food_beverage', 'Food & Beverage'),
+        ('government_public_admin', 'Government & Public Administration'),
+        ('healthcare_medical_pharma', 'Healthcare, Medical & Pharmaceutical'),
+        ('human_resources_recruitment', 'Human Resources & Recruitment'),
+        ('information_technology_telecom', 'Information Technology & Telecommunications'),
+        ('legal_services', 'Legal Services'),
+        ('logistics_supply_chain', 'Logistics, Supply Chain & Warehousing'),
+        ('manufacturing_production', 'Manufacturing & Production'),
+        ('nonprofit_ngo_social', 'Nonprofit, NGO & Social Services'),
+        ('research_science_lab', 'Research, Science & Laboratory Services'),
+        ('sales_marketing_pr', 'Sales, Marketing & Public Relations'),
+        ('security_defense', 'Security & Defense'),
+        ('web_digital_creative', 'Web, Digital Media & Creative Services'),
         ('other', 'Other'),
     ]
     STATUS_CHOICES = [
@@ -42,16 +54,26 @@ class Job(models.Model):
         ('expired', 'Expired'),
     ]
     EXPERIENCE_CHOICES = [
-        ('0-1', '0–1 years (Entry Level)'),
-        ('2-4', '2–4 years'),
-        ('5-8', '5–8 years'),
-        ('9+', '9+ years (Senior)'),
+        ('trainee', 'Trainee – 0 years'),
+        ('entry', 'Entry Level – 1–2 years'),
+        ('mid', 'Mid-level – 3–6 years'),
+        ('senior_mid', 'Senior Mid – 7–10 years'),
+        ('senior', 'Senior/Managerial – 12 years+'),
+    ]
+    QUALIFICATION_CHOICES = [
+        ('secondary', 'Secondary School Certificate or Equivalent'),
+        ('certificate', 'Certificate / Vocational Qualification'),
+        ('diploma', 'Diploma (ND, OND, NCE, HND)'),
+        ('bachelors', "Bachelor's Degree"),
+        ('postgraduate', 'Postgraduate Qualification (PGD, Master\'s, Doctorate)'),
+        ('professional', 'Professional Certification / Fellowship'),
+        ('none', 'No Formal Qualification Required'),
     ]
 
     title = models.CharField(max_length=200)
     company = models.CharField(max_length=200, default='Kennedia Consulting')
     company_logo = models.ImageField(upload_to='company_logos/', null=True, blank=True)
-    industry = models.CharField(max_length=50, choices=INDUSTRY_CHOICES)
+    industry = models.CharField(max_length=60, choices=INDUSTRY_CHOICES)
     job_type = models.CharField(max_length=20, choices=JOB_TYPE_CHOICES, default='full_time')
     location = models.CharField(max_length=200)
     salary = models.DecimalField(
@@ -60,70 +82,55 @@ class Job(models.Model):
         validators=[MinValueValidator(0)],
         help_text='Monthly salary in Naira'
     )
-    salary_display = models.CharField(max_length=100, blank=True,
-        help_text='Optional: e.g. "₦400k – ₦600k" (overrides auto-format)')
+    salary_display = models.CharField(max_length=100, blank=True)
     description = models.TextField()
+    responsibilities = models.TextField(blank=True)
     requirements = models.TextField(blank=True)
     benefits = models.TextField(blank=True)
-    experience_required = models.CharField(max_length=10, choices=EXPERIENCE_CHOICES, blank=True)
+    experience_required = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, blank=True)
+    qualification_required = models.CharField(max_length=30, choices=QUALIFICATION_CHOICES, blank=True)
+    employer_email = models.EmailField(blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     deadline = models.DateField(null=True, blank=True)
-    employer_email = models.EmailField(
-        blank=True,
-        help_text='Employer contact email — receives notification when someone applies'
-    )
+    requires_registration = models.BooleanField(default=False)
     views_count = models.PositiveIntegerField(default=0)
-    posted_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
-        null=True, related_name='posted_jobs'
-    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = 'Job'
-        verbose_name_plural = 'Jobs'
 
     def __str__(self):
-        return f"{self.title} @ {self.company}"
-
-    @property
-    def requires_registration(self):
-        """True if salary >= ₦500k — triggers the "Register to Apply" flow."""
-        if self.salary is None:
-            return False
-        return self.salary >= settings.REGISTER_APPLY_THRESHOLD
-
-    @property
-    def application_count(self):
-        return self.applications.count()
+        return self.title
 
     @property
     def formatted_salary(self):
         if self.salary_display:
             return self.salary_display
-        if not self.salary:
-            return None
-        n = int(self.salary)
-        if n >= 1_000_000:
-            return f'₦{n/1_000_000:.1f}M/month'.replace('.0M', 'M')
-        return f'₦{n//1000}k/month'
+        if self.salary:
+            n = float(self.salary)
+            if n >= 1_000_000:
+                return f'₦{n/1_000_000:.1f}M/month'.replace('.0M', 'M')
+            if n >= 1_000:
+                return f'₦{int(n/1000)}k/month'
+            return f'₦{int(n)}/month'
+        return None
+
+    @property
+    def application_count(self):
+        return self.applications.count()
 
 
 class SavedJob(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='saved_jobs'
-    )
-    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='saved_by')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='saved_jobs')
+    job  = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='saved_by')
     saved_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ('user', 'job')
-        ordering = ['-saved_at']
 
     def __str__(self):
-        return f"{self.user.email} saved {self.job.title}"
+        return f'{self.user} saved {self.job}'
 
 
 class JobApplication(models.Model):
@@ -134,35 +141,29 @@ class JobApplication(models.Model):
         ('rejected', 'Rejected'),
         ('hired', 'Hired'),
     ]
-
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='applications',
-        null=True, blank=True
-    )
-    # For easy-apply (non-registered users)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    last_name  = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20, blank=True)
-    years_of_experience = models.CharField(max_length=20, blank=True)
+    years_of_experience = models.CharField(max_length=50, blank=True)
+    cv_file = models.FileField(upload_to=cv_upload_path, null=True, blank=True)
     cover_letter = models.TextField(blank=True)
-    cv_file = models.FileField(upload_to=cv_upload_path)
-    linkedin_url = models.URLField(blank=True)
-    current_salary = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    admin_notes = models.TextField(blank=True, help_text='Internal notes — not visible to applicant')
     applied_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-applied_at']
-        verbose_name = 'Job Application'
-        verbose_name_plural = 'Job Applications'
+        unique_together = ('job', 'email')
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} → {self.job.title}"
+        return f'{self.first_name} {self.last_name} → {self.job.title}'
 
     @property
     def full_name(self):
-        return f"{self.first_name} {self.last_name}"
+        return f'{self.first_name} {self.last_name}'
+
+    @property
+    def has_cv(self):
+        return bool(self.cv_file)
