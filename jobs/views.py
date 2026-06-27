@@ -231,7 +231,7 @@ class AdminJobListView(generics.ListCreateAPIView):
         return qs
 
     def perform_create(self, serializer):
-        serializer.save(posted_by=self.request.user)
+        serializer.save()
 
 
 class AdminJobDetailView(generics.RetrieveUpdateDestroyAPIView):
