@@ -131,8 +131,8 @@ BREVO_SENDER_NAME  = config('BREVO_SENDER_NAME',  default='Kennedia Jobs')
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "kennedia-otp-cache",
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "kennedia_cache_table",
     }
 }
 
