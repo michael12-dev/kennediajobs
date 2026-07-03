@@ -2214,7 +2214,7 @@ input:focus, select:focus, textarea:focus {
       <div class="home-hero-tag">OPPORTUNITIES</div>
       <h1 class="home-hero-title">Our Latest Job Openings!</h1>
       <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:18px;">
-        <a onclick="viewAllJobs()" class="view-all-link">View All Jobs →</a>
+        <a onclick="showPage('home')" class="view-all-link">View All Jobs →</a>
       </div>
       <!-- Search bar -->
       <div class="home-search-bar">
@@ -2325,14 +2325,66 @@ input:focus, select:focus, textarea:focus {
   <!-- ══ FEATURED BANNER SLIDER ══ -->
   <section class="featured-banner-section">
     <div class="featured-banner-slider" id="featuredSlider">
-      <div class="featured-slide active" style="background-image:url('/static/images/background_img3.jpg')"></div>
-      <div class="featured-slide" style="background-image:url('/static/images/background_img1.jpg')"></div>
-      <div class="featured-slide" style="background-image:url('/static/images/background_img2.jpg')"></div>
+      <div class="featured-slide active" style="background-image:url('/static/images/background_img3.jpg')">
+        <div class="featured-slide-overlay"></div>
+        <div class="featured-slide-content">
+          <h2>Monthly Talent<br>Acquisition Drive</h2>
+          <p>Join our ongoing recruitment campaign and get matched with top employers this month.</p>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <button class="feat-btn-primary" onclick="showPage('job-search')">Submit your CV</button>
+            <button class="feat-btn-secondary" onclick="showPage('about')">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="featured-slide" style="background-image:url('/static/images/background_img1.jpg')">
+        <div class="featured-slide-overlay"></div>
+        <div class="featured-slide-content">
+          <h2>Get Qualified as a<br>Certified Professional</h2>
+          <p>Build the skills employers are looking for with our career training programmes.</p>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <button class="feat-btn-primary" onclick="showPage('career-training')">Enrol Now</button>
+            <button class="feat-btn-secondary" onclick="showPage('services')">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="featured-slide" style="background-image:url('/static/images/background_img2.jpg')">
+        <div class="featured-slide-overlay"></div>
+        <div class="featured-slide-content">
+          <h2>Post a Job<br>For Free Today</h2>
+          <p>Get your vacancies in front of thousands of qualified candidates across Nigeria.</p>
+          <div style="display:flex;gap:12px;margin-top:24px;">
+            <button class="feat-btn-primary" onclick="showPage('employers')">Post a Job</button>
+            <button class="feat-btn-secondary" onclick="showPage('employers')">Learn More</button>
+          </div>
+        </div>
+      </div>
       <!-- Dots -->
       <div class="featured-dots">
         <span class="feat-dot active" onclick="goToFeatSlide(0)"></span>
         <span class="feat-dot" onclick="goToFeatSlide(1)"></span>
         <span class="feat-dot" onclick="goToFeatSlide(2)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATS BAR ══ -->
+  <section class="stats-section">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num" data-target="3000">0</div>
+        <div class="stat-label">Candidates Placed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="500">0</div>
+        <div class="stat-label">Active Vacancies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="200">0</div>
+        <div class="stat-label">Partner Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="36">0</div>
+        <div class="stat-label">States Covered</div>
       </div>
     </div>
   </section>
@@ -2376,21 +2428,13 @@ input:focus, select:focus, textarea:focus {
   <!-- ══ PARTNER LOGOS ══ -->
   <section class="partners-section">
     <div class="section-tag" style="text-align:center;display:block;margin-bottom:16px;">OUR PARTNERS</div>
-    <div class="partners-marquee-wrap">
-      <div class="partners-marquee">
-        <img src="/static/images/c1.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c2.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c3.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c4.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c5.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c6.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c1.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c2.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c3.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c4.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c5.png" alt="Partner" class="partner-img">
-        <img src="/static/images/c6.png" alt="Partner" class="partner-img">
-      </div>
+    <div class="partners-track">
+      <img src="/static/images/c1.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c2.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c3.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c4.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c5.png" alt="Partner" class="partner-img">
+      <img src="/static/images/c6.png" alt="Partner" class="partner-img">
     </div>
   </section>
 
@@ -3064,10 +3108,10 @@ input:focus, select:focus, textarea:focus {
   <div class="dashboard-wrap" style="padding-top:28px;">
     <!-- Stats -->
     <div class="dash-stats">
-      <div class="dash-stat-card"><strong>7</strong><span>Jobs Applied</span></div>
-      <div class="dash-stat-card"><strong>3</strong><span>Under Review</span></div>
-      <div class="dash-stat-card"><strong>1</strong><span>Shortlisted</span></div>
-      <div class="dash-stat-card"><strong>12</strong><span>Saved Jobs</span></div>
+      <div class="dash-stat-card"><strong id="dash-stat-applied">—</strong><span>Jobs Applied</span></div>
+      <div class="dash-stat-card"><strong id="dash-stat-review">—</strong><span>Under Review</span></div>
+      <div class="dash-stat-card"><strong id="dash-stat-short">—</strong><span>Shortlisted</span></div>
+      <div class="dash-stat-card"><strong id="dash-stat-saved">—</strong><span>Saved Jobs</span></div>
     </div>
     <!-- Tabs -->
     <div class="dash-tabs">
@@ -3094,12 +3138,31 @@ input:focus, select:focus, textarea:focus {
         <input id="dash-job-search" type="text" placeholder="Search jobs…" oninput="filterDashJobs()" style="flex:1;min-width:180px;padding:9px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;">
         <select id="dash-job-industry" onchange="filterDashJobs()" style="padding:9px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;background:white;">
           <option value="">All Industries</option>
-          <option value="banking_finance">Banking & Finance</option>
-          <option value="technology">Technology</option>
-          <option value="fmcg_retail">FMCG / Retail</option>
-          <option value="oil_gas">Oil & Gas</option>
-          <option value="healthcare">Healthcare</option>
-          <option value="hr_consulting">HR / Consulting</option>
+          <option value="accounting_finance_banking">Accounting, Finance & Banking</option>
+          <option value="agriculture_agribusiness">Agriculture & Agribusiness</option>
+          <option value="arts_entertainment_media">Arts, Entertainment & Media</option>
+          <option value="automotive_aviation_transport">Automotive, Aviation & Transportation</option>
+          <option value="construction_engineering_realestate">Construction, Engineering & Real Estate</option>
+          <option value="consumer_goods_retail_ecommerce">Consumer Goods, Retail & E-commerce</option>
+          <option value="consulting_professional_services">Consulting & Professional Services</option>
+          <option value="education_training">Education & Training</option>
+          <option value="energy_utilities_mining_oilgas">Energy, Utilities, Mining & Oil & Gas</option>
+          <option value="event_hospitality_tourism">Event Management, Hospitality & Tourism</option>
+          <option value="fashion_beauty_lifestyle">Fashion, Beauty & Lifestyle</option>
+          <option value="food_beverage">Food & Beverage</option>
+          <option value="government_public_admin">Government & Public Administration</option>
+          <option value="healthcare_medical_pharma">Healthcare, Medical & Pharmaceutical</option>
+          <option value="human_resources_recruitment">Human Resources & Recruitment</option>
+          <option value="information_technology_telecom">Information Technology & Telecommunications</option>
+          <option value="legal_services">Legal Services</option>
+          <option value="logistics_supply_chain">Logistics, Supply Chain & Warehousing</option>
+          <option value="manufacturing_production">Manufacturing & Production</option>
+          <option value="nonprofit_ngo_social">Nonprofit, NGO & Social Services</option>
+          <option value="research_science_lab">Research, Science & Laboratory Services</option>
+          <option value="sales_marketing_pr">Sales, Marketing & Public Relations</option>
+          <option value="security_defense">Security & Defense</option>
+          <option value="web_digital_creative">Web, Digital Media & Creative Services</option>
+          <option value="other">Other</option>
         </select>
       </div>
       <div id="dash-jobs-grid" class="jobs-grid" style="margin-bottom:16px;"></div>
@@ -3141,13 +3204,30 @@ input:focus, select:focus, textarea:focus {
           <div class="form-group"><label>Industry</label>
             <select id="prof-industry">
               <option value="">Select Industry</option>
-              <option value="banking_finance">Banking & Finance</option>
-              <option value="technology">Technology</option>
-              <option value="fmcg_retail">FMCG / Retail</option>
-              <option value="oil_gas">Oil & Gas</option>
-              <option value="healthcare">Healthcare</option>
-              <option value="hr_consulting">Human Resources / Consulting</option>
-              <option value="manufacturing">Manufacturing</option>
+              <option value="accounting_finance_banking">Accounting, Finance & Banking</option>
+              <option value="agriculture_agribusiness">Agriculture & Agribusiness</option>
+              <option value="arts_entertainment_media">Arts, Entertainment & Media</option>
+              <option value="automotive_aviation_transport">Automotive, Aviation & Transportation</option>
+              <option value="construction_engineering_realestate">Construction, Engineering & Real Estate</option>
+              <option value="consumer_goods_retail_ecommerce">Consumer Goods, Retail & E-commerce</option>
+              <option value="consulting_professional_services">Consulting & Professional Services</option>
+              <option value="education_training">Education & Training</option>
+              <option value="energy_utilities_mining_oilgas">Energy, Utilities, Mining & Oil & Gas</option>
+              <option value="event_hospitality_tourism">Event Management, Hospitality & Tourism</option>
+              <option value="fashion_beauty_lifestyle">Fashion, Beauty & Lifestyle</option>
+              <option value="food_beverage">Food & Beverage</option>
+              <option value="government_public_admin">Government & Public Administration</option>
+              <option value="healthcare_medical_pharma">Healthcare, Medical & Pharmaceutical</option>
+              <option value="human_resources_recruitment">Human Resources & Recruitment</option>
+              <option value="information_technology_telecom">Information Technology & Telecommunications</option>
+              <option value="legal_services">Legal Services</option>
+              <option value="logistics_supply_chain">Logistics, Supply Chain & Warehousing</option>
+              <option value="manufacturing_production">Manufacturing & Production</option>
+              <option value="nonprofit_ngo_social">Nonprofit, NGO & Social Services</option>
+              <option value="research_science_lab">Research, Science & Laboratory Services</option>
+              <option value="sales_marketing_pr">Sales, Marketing & Public Relations</option>
+              <option value="security_defense">Security & Defense</option>
+              <option value="web_digital_creative">Web, Digital Media & Creative Services</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -4487,11 +4567,11 @@ async function loadDashboardData() {
     const statsRes = await apiRequest('/auth/dashboard/stats/');
     if (statsRes && statsRes.ok) {
       const stats = await statsRes.json();
-      const statCards = document.querySelectorAll('.dash-stat-card strong');
-      if (statCards[0]) statCards[0].textContent = stats.total_applications || 0;
-      if (statCards[1]) statCards[1].textContent = stats.under_review || 0;
-      if (statCards[2]) statCards[2].textContent = stats.shortlisted || 0;
-      if (statCards[3]) statCards[3].textContent = stats.saved_jobs || 0;
+      const setS = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val ?? 0; };
+      setS('dash-stat-applied', stats.total_applications);
+      setS('dash-stat-review', stats.under_review);
+      setS('dash-stat-short', stats.shortlisted);
+      setS('dash-stat-saved', stats.saved_jobs);
     }
   } catch (e) {}
 
@@ -4502,6 +4582,11 @@ async function loadDashboardData() {
     if (appRes && appRes.ok) {
       const appData = await appRes.json();
       const applications = appData.results || appData;
+      // Update stat card from real data as fallback
+      const setS2 = (id, val) => { const el = document.getElementById(id); if (el && el.textContent === '—') el.textContent = val; };
+      setS2('dash-stat-applied', applications.length);
+      setS2('dash-stat-review', applications.filter(a => a.status === 'reviewed').length);
+      setS2('dash-stat-short', applications.filter(a => a.status === 'shortlisted').length);
       if (appliedContent) {
         if (!applications.length) {
           appliedContent.innerHTML = `
@@ -4544,6 +4629,8 @@ async function loadDashboardData() {
     if (savedRes && savedRes.ok) {
       const savedData = await savedRes.json();
       const saved = savedData.results || savedData;
+      const savedStatEl = document.getElementById('dash-stat-saved');
+      if (savedStatEl) savedStatEl.textContent = saved.length;
       if (savedContent) {
         if (!saved.length) {
           savedContent.innerHTML = `
@@ -4615,9 +4702,15 @@ async function loadDashboardData() {
       // Update subtitle
       const sub = document.querySelector('.dash-welcome p');
       if (sub) {
-        const parts = [p.city, p.industry?.replace(/_/g,' '), 'Member since ' + new Date(p.date_joined || p.created_at || Date.now()).toLocaleDateString('en-GB',{month:'short',year:'numeric'})].filter(Boolean);
+        const indLabel = (typeof INDUSTRY_LABELS !== 'undefined' && p.industry) ? (INDUSTRY_LABELS[p.industry] || p.industry.replace(/_/g,' ')) : '';
+        const parts = [p.city, indLabel, 'Member since ' + new Date(p.date_joined || p.created_at || Date.now()).toLocaleDateString('en-GB',{month:'short',year:'numeric'})].filter(Boolean);
         sub.textContent = parts.join('  ·  ');
       }
+      // Also update saved jobs stat now we have profile
+      const savedEl = document.getElementById('dash-stat-saved');
+      // Refresh recommended jobs now that we have user industry
+      const recPanel = document.getElementById('dash-recommended');
+      if (recPanel && recPanel.classList.contains('active')) renderDashRecommended();
     }
   } catch(e) {}
 }
@@ -6302,7 +6395,6 @@ const jobs = [];
 
 const PER_PAGE = 9;
 let currentPage = 1;
-let _showAllJobs = false;
 let filteredJobs = [...jobs];
 
 function formatSalary(n) {
@@ -6406,7 +6498,7 @@ function renderJobs() {
   const grid = document.getElementById('jobsGrid');
   if (!grid) return;
   const start = (currentPage - 1) * PER_PAGE;
-  const slice = _showAllJobs ? filteredJobs : filteredJobs.slice(start, start + PER_PAGE);
+  const slice = filteredJobs.slice(start, start + PER_PAGE);
   if (!slice.length) {
     grid.innerHTML = `<div style="text-align:center;padding:60px 20px;color:#6b7280;grid-column:1/-1;"><div style="font-size:40px;margin-bottom:12px;">📭</div><div style="font-weight:700;font-size:16px;">No jobs found</div><div style="font-size:13px;margin-top:6px;">Try adjusting your filters or check back later.</div></div>`;
   } else {
@@ -6427,7 +6519,7 @@ function renderJobs() {
       return `<div class="job-card-new" style="${cardOpacity}" ${!expired?`onclick="${applyFn}"`:''}><div class="job-card-new-top"><div class="job-card-new-logo">${logoSrc?`<img src="${logoSrc}" alt="logo" onerror="this.style.display='none';this.parentElement.textContent='${indIcon}';">`:indIcon}</div><span class="job-type-badge ${badgeClass}">${escHtml(typeLabel).toUpperCase()}</span></div><div class="job-card-new-title">${escHtml(j.title||'')}</div><div class="job-card-new-company">${escHtml(j.company||'Kennedia Consulting')}</div><div class="job-card-new-desc">${escHtml((j.desc||'').substring(0,120))}${(j.desc||'').length>120?'&hellip;':''}</div><div class="job-card-new-meta"><span>📍 ${escHtml(j.loc||'Nigeria')}</span><span>⏱ ${timeAgo(j.created_at)}</span></div><button class="job-card-new-apply" ${expired?'disabled':`onclick="event.stopPropagation();${applyFn}"`}>${btnLabel}</button></div>`;
     }).join('');
   }
-  const total = _showAllJobs ? 1 : Math.ceil(filteredJobs.length / PER_PAGE);
+  const total = Math.ceil(filteredJobs.length / PER_PAGE);
   const pag = document.getElementById('jobsPagination')||document.getElementById('pagination');
   if (pag) {
     if (total <= 1) { pag.innerHTML = ''; }
@@ -6445,25 +6537,9 @@ function renderJobs() {
   updateIndustryTileCounts();
 }
 function goToJobPage(p) {
-  _showAllJobs = false;
   currentPage = p;
   renderJobs();
   window.scrollTo({ top: document.getElementById('jobsGrid').offsetTop - 100, behavior: 'smooth' });
-}
-
-// Show every available job at once (used by the "View All Jobs" link)
-function viewAllJobs() {
-  if (typeof showPage === 'function') showPage('home');
-  ['filterLoc','filterInd','filterTitle'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  const jobSource = (typeof apiJobs !== 'undefined' && apiJobs.length) ? apiJobs : jobs;
-  filteredJobs = jobSource.filter(j => j.status !== 'draft');
-  _showAllJobs = true;
-  currentPage = 1;
-  renderJobs();
-  const grid = document.getElementById('jobsGrid');
-  if (grid) setTimeout(() => window.scrollTo({ top: grid.offsetTop - 100, behavior: 'smooth' }), 120);
 }
 
 // ── PAGE NAVIGATION SWITCHER ──
@@ -7538,7 +7614,6 @@ function filterJobs() {
     return true;
   });
   currentPage = 1;
-  _showAllJobs = false;
   renderJobs();
 }
 
