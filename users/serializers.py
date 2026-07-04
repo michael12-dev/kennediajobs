@@ -75,7 +75,11 @@ class AdminUserSerializer(serializers.ModelSerializer):
         return obj.get_full_name()
 
     def get_application_count(self, obj):
+    try:
         return obj.applications.count()
+    except AttributeError:
+        from jobs.models import JobApplication
+        return JobApplication.objects.filter(email=obj.email).count()
 
 
 class ChangePasswordSerializer(serializers.Serializer):
