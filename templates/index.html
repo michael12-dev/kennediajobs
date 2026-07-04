@@ -3971,9 +3971,19 @@ async function handleLogin() {
     if (res.ok) {
       setTokens(data.access, data.refresh);
       currentUser = data.user;
+      // Fetch full profile so first_name is available immediately
+      try {
+        const profRes = await fetch(API_BASE + '/auth/profile/', {
+          headers: { 'Authorization': 'Bearer ' + data.access, 'Content-Type': 'application/json' }
+        });
+        if (profRes.ok) {
+          const profData = await profRes.json();
+          currentUser = { ...currentUser, ...profData };
+        }
+      } catch(e) {}
       closeAuthModal();
       updateNavForAuth(currentUser);
-      showToast('Welcome back, ' + (currentUser.full_name || currentUser.email) + '! 👋');
+      showToast('Welcome back, ' + (currentUser.first_name || currentUser.email?.split('@')[0]) + '! 👋');
       // Redirect admins to admin panel
       if (isAdminUser(currentUser)) {
         setTimeout(() => showPage('admin-panel'), 600);
@@ -4066,6 +4076,16 @@ async function handleRegisterStep3() {
     if (res.ok) {
       setTokens(data.access, data.refresh);
       currentUser = data.user;
+      // Fetch full profile so first_name, last_name are available
+      try {
+        const profRes = await fetch(API_BASE + '/auth/profile/', {
+          headers: { 'Authorization': 'Bearer ' + data.access, 'Content-Type': 'application/json' }
+        });
+        if (profRes.ok) {
+          const profData = await profRes.json();
+          currentUser = { ...currentUser, ...profData };
+        }
+      } catch(e) {}
       _pendingOTPEmail = '';
       closeAuthModal();
       updateNavForAuth(currentUser);
@@ -4401,7 +4421,8 @@ function updateNavForAuth(user) {
     userMenu.style.display = 'flex';
     const initials = ((user.first_name || user.full_name || user.email || 'U')[0]).toUpperCase();
     document.getElementById('nav-avatar').textContent = initials;
-    document.getElementById('nav-user-name').textContent = user.full_name || user.first_name || user.email;
+    const displayName = user.first_name || (user.full_name ? user.full_name.split(' ')[0] : null) || user.email?.split('@')[0] || 'User';
+    document.getElementById('nav-user-name').textContent = displayName;
     // Show admin panel link for admins, hide dashboard link for admins
     adminLink.style.display = isAdminUser(user) ? 'flex' : 'none';
     if (dashLink) dashLink.style.display = isAdminUser(user) ? 'none' : 'flex';
