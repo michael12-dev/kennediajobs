@@ -13,13 +13,30 @@ class CustomUser(AbstractUser):
         ('super_admin', 'Super Admin'),
     ]
     INDUSTRY_CHOICES = [
-        ('banking_finance', 'Banking & Finance'),
-        ('technology', 'Technology'),
-        ('fmcg_retail', 'FMCG / Retail'),
-        ('oil_gas', 'Oil & Gas'),
-        ('healthcare', 'Healthcare'),
-        ('hr_consulting', 'Human Resources / Consulting'),
-        ('manufacturing', 'Manufacturing'),
+        ('accounting_finance_banking', 'Accounting, Finance & Banking'),
+        ('agriculture_agribusiness', 'Agriculture & Agribusiness'),
+        ('arts_entertainment_media', 'Arts, Entertainment & Media'),
+        ('automotive_aviation_transport', 'Automotive, Aviation & Transportation'),
+        ('construction_engineering_realestate', 'Construction, Engineering & Real Estate'),
+        ('consumer_goods_retail_ecommerce', 'Consumer Goods, Retail & E-commerce'),
+        ('consulting_professional_services', 'Consulting & Professional Services'),
+        ('education_training', 'Education & Training'),
+        ('energy_utilities_mining_oilgas', 'Energy, Utilities, Mining & Oil & Gas'),
+        ('event_hospitality_tourism', 'Event Management, Hospitality & Tourism'),
+        ('fashion_beauty_lifestyle', 'Fashion, Beauty & Lifestyle'),
+        ('food_beverage', 'Food & Beverage'),
+        ('government_public_admin', 'Government & Public Administration'),
+        ('healthcare_medical_pharma', 'Healthcare, Medical & Pharmaceutical'),
+        ('human_resources_recruitment', 'Human Resources & Recruitment'),
+        ('information_technology_telecom', 'Information Technology & Telecommunications'),
+        ('legal_services', 'Legal Services'),
+        ('logistics_supply_chain', 'Logistics, Supply Chain & Warehousing'),
+        ('manufacturing_production', 'Manufacturing & Production'),
+        ('nonprofit_ngo_social', 'Nonprofit, NGO & Social Services'),
+        ('research_science_lab', 'Research, Science & Laboratory Services'),
+        ('sales_marketing_pr', 'Sales, Marketing & Public Relations'),
+        ('security_defense', 'Security & Defense'),
+        ('web_digital_creative', 'Web, Digital Media & Creative Services'),
         ('other', 'Other'),
     ]
 
@@ -27,7 +44,7 @@ class CustomUser(AbstractUser):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='job_seeker')
     phone = models.CharField(max_length=20, blank=True)
     city = models.CharField(max_length=100, blank=True)
-    industry = models.CharField(max_length=50, choices=INDUSTRY_CHOICES, blank=True)
+    industry = models.CharField(max_length=60, choices=INDUSTRY_CHOICES, blank=True)
     years_of_experience = models.PositiveSmallIntegerField(null=True, blank=True)
     linkedin_url = models.URLField(blank=True)
     profile_summary = models.TextField(blank=True)
