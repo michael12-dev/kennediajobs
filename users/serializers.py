@@ -27,7 +27,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        # Auto-generate username from email if not supplied
         if not validated_data.get('username'):
             validated_data['username'] = validated_data['email'].split('@')[0]
         user = User.objects.create_user(**validated_data)
@@ -54,7 +53,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return obj.get_full_name()
 
     def get_application_count(self, obj):
-        return obj.applications.count()
+        try:
+            return obj.applications.count()
+        except AttributeError:
+            from jobs.models import JobApplication
+            return JobApplication.objects.filter(email=obj.email).count()
 
 
 class AdminUserSerializer(serializers.ModelSerializer):
@@ -75,11 +78,11 @@ class AdminUserSerializer(serializers.ModelSerializer):
         return obj.get_full_name()
 
     def get_application_count(self, obj):
-    try:
-        return obj.applications.count()
-    except AttributeError:
-        from jobs.models import JobApplication
-        return JobApplication.objects.filter(email=obj.email).count()
+        try:
+            return obj.applications.count()
+        except AttributeError:
+            from jobs.models import JobApplication
+            return JobApplication.objects.filter(email=obj.email).count()
 
 
 class ChangePasswordSerializer(serializers.Serializer):
@@ -100,8 +103,6 @@ class KennediaTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
         user = self.user
-        # Auto-fix role for superusers created via createsuperuser command
-        # (which doesn't know about the custom role field)
         role = user.role
         if user.is_superuser and role not in ('admin', 'super_admin'):
             user.role = 'super_admin'
