@@ -6354,7 +6354,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Check session & fetch live data
   checkSession();
-  fetchJobsFromAPI();
+  fetchJobsFromAPI().then(() => {
+    // Check if URL has ?job=ID parameter and open that job
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobId = urlParams.get('job');
+    if (jobId) {
+      const job = apiJobs.find(j => j.id === parseInt(jobId));
+      if (job) {
+        setTimeout(() => showApplyPageFromData(job), 300);
+      } else {
+        // Job not in cache yet — fetch it directly
+        fetch(API_BASE + '/jobs/' + jobId + '/')
+          .then(r => r.ok ? r.json() : null)
+          .then(data => {
+            if (data) {
+              const jobData = {
+                id: data.id,
+                title: data.title,
+                company: data.company || 'Kennedia Consulting',
+                loc: data.location || 'Nigeria',
+                location: data.location || 'Nigeria',
+                ind: data.industry_display || data.industry || '',
+                industry: data.industry || '',
+                type: data.job_type_display || data.job_type || 'Full time',
+                job_type: data.job_type || 'full_time',
+                salary: parseFloat(data.salary) || 0,
+                salary_display: data.formatted_salary || null,
+                desc: data.description ? data.description.replace(/<[^>]+>/g,'').substring(0,180) : '',
+                description: data.description || '',
+                requirements: data.requirements || '',
+                responsibilities: data.responsibilities || '',
+                benefits: data.benefits || '',
+                deadline: data.deadline || null,
+                status: data.status || 'active',
+                requires_registration: data.requires_registration || false,
+              };
+              setTimeout(() => showApplyPageFromData(jobData), 300);
+            }
+          }).catch(() => {});
+      }
+    }
+  });
   fetchBlogsFromAPI();
 });
 
@@ -7573,13 +7613,12 @@ async function unsaveJob(jobId) {
 }
 
 function shareJob(jobId, jobTitle) {
-  const url = window.location.origin + '/?job=' + jobId;
+  if (!jobId) { showToast('Cannot share this job — missing ID.'); return; }
+  const url = window.location.origin + window.location.pathname + '?job=' + jobId;
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(() => {
-      showToast('🔗 Job link copied to clipboard!');
-    }).catch(() => {
-      fallbackCopy(url);
-    });
+      showToast('🔗 Job link copied! Share it with anyone.');
+    }).catch(() => { fallbackCopy(url); });
   } else {
     fallbackCopy(url);
   }
