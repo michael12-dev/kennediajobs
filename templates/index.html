@@ -1710,6 +1710,20 @@ input:focus, select:focus, textarea:focus {
   color: #9ca3af;
   cursor: not-allowed;
 }
+.job-share-btn {
+  padding: 11px 14px;
+  border: 2px solid #e5e7eb;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.job-share-btn:hover {
+  border-color: var(--green);
+  background: var(--green-light);
+}
 
 /* ── Featured banner ── */
 .featured-banner-section { padding: 32px 5%; background: #f9fafb; }
@@ -2214,7 +2228,7 @@ input:focus, select:focus, textarea:focus {
       <div class="home-hero-tag">OPPORTUNITIES</div>
       <h1 class="home-hero-title">Our Latest Job Openings!</h1>
       <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:18px;">
-        <a onclick="showPage('home')" class="view-all-link">View All Jobs →</a>
+        <a onclick="document.getElementById('jobsGrid').scrollIntoView({behavior:'smooth'})" class="view-all-link">View All Jobs →</a>
       </div>
       <!-- Search bar -->
       <div class="home-search-bar">
@@ -2322,72 +2336,8 @@ input:focus, select:focus, textarea:focus {
     </div>
   </section>
 
-  <!-- ══ FEATURED BANNER SLIDER ══ -->
-  <section class="featured-banner-section">
-    <div class="featured-banner-slider" id="featuredSlider">
-      <div class="featured-slide active" style="background-image:url('/static/images/background_img3.jpg')">
-        <div class="featured-slide-overlay"></div>
-        <div class="featured-slide-content">
-          <h2>Monthly Talent<br>Acquisition Drive</h2>
-          <p>Join our ongoing recruitment campaign and get matched with top employers this month.</p>
-          <div style="display:flex;gap:12px;margin-top:24px;">
-            <button class="feat-btn-primary" onclick="showPage('job-search')">Submit your CV</button>
-            <button class="feat-btn-secondary" onclick="showPage('about')">Learn More</button>
-          </div>
-        </div>
-      </div>
-      <div class="featured-slide" style="background-image:url('/static/images/background_img1.jpg')">
-        <div class="featured-slide-overlay"></div>
-        <div class="featured-slide-content">
-          <h2>Get Qualified as a<br>Certified Professional</h2>
-          <p>Build the skills employers are looking for with our career training programmes.</p>
-          <div style="display:flex;gap:12px;margin-top:24px;">
-            <button class="feat-btn-primary" onclick="showPage('career-training')">Enrol Now</button>
-            <button class="feat-btn-secondary" onclick="showPage('services')">Learn More</button>
-          </div>
-        </div>
-      </div>
-      <div class="featured-slide" style="background-image:url('/static/images/background_img2.jpg')">
-        <div class="featured-slide-overlay"></div>
-        <div class="featured-slide-content">
-          <h2>Post a Job<br>For Free Today</h2>
-          <p>Get your vacancies in front of thousands of qualified candidates across Nigeria.</p>
-          <div style="display:flex;gap:12px;margin-top:24px;">
-            <button class="feat-btn-primary" onclick="showPage('employers')">Post a Job</button>
-            <button class="feat-btn-secondary" onclick="showPage('employers')">Learn More</button>
-          </div>
-        </div>
-      </div>
-      <!-- Dots -->
-      <div class="featured-dots">
-        <span class="feat-dot active" onclick="goToFeatSlide(0)"></span>
-        <span class="feat-dot" onclick="goToFeatSlide(1)"></span>
-        <span class="feat-dot" onclick="goToFeatSlide(2)"></span>
-      </div>
-    </div>
-  </section>
 
-  <!-- ══ STATS BAR ══ -->
-  <section class="stats-section">
-    <div class="stats-inner">
-      <div class="stat-item">
-        <div class="stat-num" data-target="3000">0</div>
-        <div class="stat-label">Candidates Placed</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="500">0</div>
-        <div class="stat-label">Active Vacancies</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="200">0</div>
-        <div class="stat-label">Partner Companies</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="36">0</div>
-        <div class="stat-label">States Covered</div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ══ HOW IT WORKS ══ -->
   <section class="how-section">
@@ -6537,7 +6487,7 @@ function renderJobs() {
       const cardOpacity = expired ? 'opacity:0.6;' : '';
       const btnLabel = expired ? '⛔ Applications Closed' : (needsReg ? '🔒 Register & Apply' : 'Apply Now');
       const logoSrc = j.logo||'';
-      return `<div class="job-card-new" style="${cardOpacity}" ${!expired?`onclick="${applyFn}"`:''}><div class="job-card-new-top"><div class="job-card-new-logo">${logoSrc?`<img src="${logoSrc}" alt="logo" onerror="this.style.display='none';this.parentElement.textContent='${indIcon}';">`:indIcon}</div><span class="job-type-badge ${badgeClass}">${escHtml(typeLabel).toUpperCase()}</span></div><div class="job-card-new-title">${escHtml(j.title||'')}</div><div class="job-card-new-company">${escHtml(j.company||'Kennedia Consulting')}</div><div class="job-card-new-desc">${escHtml((j.desc||'').substring(0,120))}${(j.desc||'').length>120?'&hellip;':''}</div><div class="job-card-new-meta"><span>📍 ${escHtml(j.loc||'Nigeria')}</span><span>⏱ ${timeAgo(j.created_at)}</span></div><button class="job-card-new-apply" ${expired?'disabled':`onclick="event.stopPropagation();${applyFn}"`}>${btnLabel}</button></div>`;
+      return `<div class="job-card-new" style="${cardOpacity}" ${!expired?`onclick="${applyFn}"`:''}><div class="job-card-new-top"><div class="job-card-new-logo">${logoSrc?`<img src="${logoSrc}" alt="logo" onerror="this.style.display='none';this.parentElement.textContent='${indIcon}';">`:indIcon}</div><span class="job-type-badge ${badgeClass}">${escHtml(typeLabel).toUpperCase()}</span></div><div class="job-card-new-title">${escHtml(j.title||'')}</div><div class="job-card-new-company">${escHtml(j.company||'Kennedia Consulting')}</div><div class="job-card-new-desc">${escHtml((j.desc||'').substring(0,120))}${(j.desc||'').length>120?'&hellip;':''}</div><div class="job-card-new-meta"><span>📍 ${escHtml(j.loc||'Nigeria')}</span><span>⏱ ${timeAgo(j.created_at)}</span></div><button class="job-card-new-apply" ${expired?'disabled':`onclick="event.stopPropagation();${applyFn}"`}>${btnLabel}</button><button class="job-share-btn" onclick="event.stopPropagation();shareJob(${j.id||0},'${escapedTitle}')" title="Share this job" style="flex-shrink:0;">🔗</button></div></div>`;
     }).join('');
   }
   const total = Math.ceil(filteredJobs.length / PER_PAGE);
@@ -7620,6 +7570,30 @@ async function unsaveJob(jobId) {
       showToast('Could not remove job.');
     }
   } catch(e) { showToast('Error removing job.'); }
+}
+
+function shareJob(jobId, jobTitle) {
+  const url = window.location.origin + '/?job=' + jobId;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast('🔗 Job link copied to clipboard!');
+    }).catch(() => {
+      fallbackCopy(url);
+    });
+  } else {
+    fallbackCopy(url);
+  }
+}
+function fallbackCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.style.position = 'fixed';
+  el.style.opacity = '0';
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  showToast('🔗 Job link copied to clipboard!');
 }
 
 function filterJobs() {
