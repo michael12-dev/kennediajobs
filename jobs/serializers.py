@@ -60,7 +60,6 @@ class JobApplicationSerializer(serializers.ModelSerializer):
             'id', 'job', 'job_title', 'job_company', 'requires_registration',
             'first_name', 'last_name', 'email', 'phone',
             'years_of_experience', 'cover_letter', 'cv_file',
-            'linkedin_url', 'current_salary',
             'status', 'applied_at', 'updated_at',
         ]
         read_only_fields = ['id', 'job', 'status', 'applied_at', 'updated_at',
