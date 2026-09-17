@@ -60,9 +60,9 @@ class JobApplicationSerializer(serializers.ModelSerializer):
             'id', 'job', 'job_title', 'job_company', 'requires_registration',
             'first_name', 'last_name', 'email', 'phone',
             'years_of_experience', 'cover_letter', 'cv_file',
-            'status', 'applied_at', 'updated_at',
+            'status', 'applied_at',
         ]
-        read_only_fields = ['id', 'job', 'status', 'applied_at', 'updated_at',
+        read_only_fields = ['id', 'job', 'status', 'applied_at',
                             'job_title', 'job_company', 'requires_registration']
 
     def validate_cv_file(self, value):
