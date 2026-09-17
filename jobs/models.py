@@ -142,7 +142,12 @@ class JobApplication(models.Model):
         ('hired', 'Hired'),
     ]
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name='applications'
+    )
     first_name = models.CharField(max_length=100)
     last_name  = models.CharField(max_length=100)
     email = models.EmailField()
