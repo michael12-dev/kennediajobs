@@ -6,7 +6,7 @@ import threading
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from rest_framework import generics, status, permissions, filters
@@ -371,17 +371,21 @@ def download_cv(request, pk):
     if not application.cv_file:
         return Response({'error': 'No CV file for this application.'}, status=404)
 
-    cv_path = application.cv_file.path
+    try:
+        application.cv_file.open('rb')
+        file_bytes = application.cv_file.read()
+        application.cv_file.close()
+    except Exception:
+        return Response({'error': 'CV file not found or could not be retrieved.'}, status=404)
 
-    if not os.path.exists(cv_path):
-        return Response({'error': 'CV file not found on server.'}, status=404)
-
-    ext = os.path.splitext(cv_path)[1]
+    ext = os.path.splitext(application.cv_file.name)[1]
     safe_name = f"{application.first_name}_{application.last_name}_{application.job.title}".replace(' ', '_')
     safe_name = ''.join(c for c in safe_name if c.isalnum() or c in ('_', '-'))
     filename = f'{safe_name}_CV{ext}'
 
-    return FileResponse(open(cv_path, 'rb'), as_attachment=True, filename=filename)
+    response = HttpResponse(file_bytes, content_type='application/octet-stream')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
 
 
 @api_view(['GET'])
@@ -412,15 +416,18 @@ def download_all_cvs(request, pk):
         for app in applications:
             if not app.cv_file:
                 continue
-            cv_path = app.cv_file.path
-            if not os.path.exists(cv_path):
+            try:
+                app.cv_file.open('rb')
+                file_bytes = app.cv_file.read()
+                app.cv_file.close()
+            except Exception:
                 continue
-            ext = os.path.splitext(cv_path)[1]
+            ext = os.path.splitext(app.cv_file.name)[1]
             arc_name = f"{app.first_name}_{app.last_name}{ext}".replace(' ', '_')
             if arc_name in used_names:
                 arc_name = f"{app.first_name}_{app.last_name}_{app.id}{ext}".replace(' ', '_')
             used_names.append(arc_name)
-            zf.write(cv_path, arc_name)
+            zf.writestr(arc_name, file_bytes)
             added += 1
 
     if added == 0:
