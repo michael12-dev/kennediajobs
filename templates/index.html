@@ -3204,9 +3204,12 @@ input:focus, select:focus, textarea:focus {
   <div class="admin-wrap">
     <!-- Sidebar -->
     <div class="admin-sidebar">
-      <div class="admin-sidebar-logo">
-        <h3>🛡 Kennedia Admin</h3>
-        <span id="adminRoleLabel">Super Admin</span>
+      <div class="admin-sidebar-logo" style="display:flex;align-items:center;gap:8px;">
+        <img src="/static/images/logo.png" alt="Kennedia Jobs" style="height:28px;width:auto;object-fit:contain;" onerror="this.style.display='none';">
+        <div>
+          <h3 style="margin:0;">🛡 Kennedia Admin</h3>
+          <span id="adminRoleLabel">Super Admin</span>
+        </div>
       </div>
       <div class="admin-nav-group">
         <div class="admin-nav-label">Overview</div>
@@ -3245,7 +3248,6 @@ input:focus, select:focus, textarea:focus {
         <div class="admin-topbar">
           <h1>Dashboard Overview</h1>
           <div class="admin-topbar-actions">
-            <img src="/static/images/logo.png" alt="Kennedia Jobs" style="height:36px;width:auto;object-fit:contain;margin-right:8px;" onerror="this.style.display='none';">
             <span id="admin-today-date" style="font-size:12px; color:var(--muted);"></span>
             <span class="admin-badge" id="admin-role-badge">Admin</span>
           </div>
