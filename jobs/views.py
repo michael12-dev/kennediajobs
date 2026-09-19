@@ -2,6 +2,7 @@ import os
 import zipfile
 import tempfile
 import threading
+import requests
 
 from django.db.models import Q
 from django.core.mail import send_mail
@@ -372,11 +373,12 @@ def download_cv(request, pk):
         return Response({'error': 'No CV file for this application.'}, status=404)
 
     try:
-        application.cv_file.open('rb')
-        file_bytes = application.cv_file.read()
-        application.cv_file.close()
-    except Exception:
-        return Response({'error': 'CV file not found or could not be retrieved.'}, status=404)
+        file_url = application.cv_file.url
+        remote = requests.get(file_url, timeout=15)
+        remote.raise_for_status()
+        file_bytes = remote.content
+    except Exception as e:
+        return Response({'error': f'Could not retrieve CV file: {e}'}, status=502)
 
     ext = os.path.splitext(application.cv_file.name)[1]
     safe_name = f"{application.first_name}_{application.last_name}_{application.job.title}".replace(' ', '_')
@@ -417,9 +419,9 @@ def download_all_cvs(request, pk):
             if not app.cv_file:
                 continue
             try:
-                app.cv_file.open('rb')
-                file_bytes = app.cv_file.read()
-                app.cv_file.close()
+                remote = requests.get(app.cv_file.url, timeout=15)
+                remote.raise_for_status()
+                file_bytes = remote.content
             except Exception:
                 continue
             ext = os.path.splitext(app.cv_file.name)[1]
