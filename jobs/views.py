@@ -2,6 +2,7 @@ import os
 import zipfile
 import tempfile
 import threading
+import mimetypes
 import requests
 
 from django.db.models import Q
@@ -380,12 +381,17 @@ def download_cv(request, pk):
     except Exception as e:
         return Response({'error': f'Could not retrieve CV file: {e}'}, status=502)
 
+    content_type = remote.headers.get('Content-Type', 'application/octet-stream').split(';')[0].strip()
+
     ext = os.path.splitext(application.cv_file.name)[1]
+    if not ext:
+        ext = mimetypes.guess_extension(content_type) or ''
+
     safe_name = f"{application.first_name}_{application.last_name}_{application.job.title}".replace(' ', '_')
     safe_name = ''.join(c for c in safe_name if c.isalnum() or c in ('_', '-'))
     filename = f'{safe_name}_CV{ext}'
 
-    response = HttpResponse(file_bytes, content_type='application/octet-stream')
+    response = HttpResponse(file_bytes, content_type=content_type)
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response
 
@@ -424,7 +430,10 @@ def download_all_cvs(request, pk):
                 file_bytes = remote.content
             except Exception:
                 continue
+            content_type = remote.headers.get('Content-Type', '').split(';')[0].strip()
             ext = os.path.splitext(app.cv_file.name)[1]
+            if not ext:
+                ext = mimetypes.guess_extension(content_type) or ''
             arc_name = f"{app.first_name}_{app.last_name}{ext}".replace(' ', '_')
             if arc_name in used_names:
                 arc_name = f"{app.first_name}_{app.last_name}_{app.id}{ext}".replace(' ', '_')
